@@ -1,3 +1,13 @@
+---
+title: Real Time ISL Command Recognition
+emoji: 🤟
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # Real-Time Indian Sign Language Command Recognition with Temporal Deep Learning
 
 A final-year AI capstone: recognising a **fixed vocabulary of isolated ISL commands**
