@@ -1,0 +1,17 @@
+protocol,split,model,threshold,coverage,selective_accuracy,uncertain_rate,accepted,accepted_correct,pessimistic_accuracy
+session_disjoint,val,gru_mha,0.2,0.973684,0.817568,0.026316,148,121,0.796053
+session_disjoint,val,gru_mha,0.25,0.953947,0.813793,0.046053,145,118,0.776316
+session_disjoint,val,gru_mha,0.3,0.953947,0.813793,0.046053,145,118,0.776316
+session_disjoint,val,gru_mha,0.35,0.914474,0.820144,0.085526,139,114,0.75
+session_disjoint,val,gru_mha,0.4,0.875,0.819549,0.125,133,109,0.717105
+session_disjoint,val,gru_mha,0.45,0.842105,0.828125,0.157895,128,106,0.697368
+session_disjoint,val,gru_mha,0.5,0.802632,0.827869,0.197368,122,101,0.664474
+session_disjoint,val,gru_mha,0.55,0.743421,0.831858,0.256579,113,94,0.618421
+session_disjoint,val,gru_mha,0.6,0.664474,0.831683,0.335526,101,84,0.552632
+session_disjoint,val,gru_mha,0.65,0.631579,0.864583,0.368421,96,83,0.546053
+session_disjoint,val,gru_mha,0.7,0.578947,0.852273,0.421053,88,75,0.493421
+session_disjoint,val,gru_mha,0.75,0.539474,0.865854,0.460526,82,71,0.467105
+session_disjoint,val,gru_mha,0.8,0.513158,0.871795,0.486842,78,68,0.447368
+session_disjoint,val,gru_mha,0.85,0.440789,0.880597,0.559211,67,59,0.388158
+session_disjoint,val,gru_mha,0.9,0.315789,0.916667,0.684211,48,44,0.289474
+session_disjoint,val,gru_mha,0.95,0.118421,1.0,0.881579,18,18,0.118421

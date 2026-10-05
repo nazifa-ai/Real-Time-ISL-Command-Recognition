@@ -1,0 +1,12 @@
+{
+  "protocol": "official",
+  "train": 686,
+  "val": 80,
+  "test": 192,
+  "classes_train": 50,
+  "classes_val": 50,
+  "classes_test": 49,
+  "val_strategy": "official train/test + seeded stratified session-aware carve-out (val_fraction=0.1, seed=42)",
+  "session_overlap_train_test": 9,
+  "note": "INCLUDE publishes no signer metadata -> signer-disjoint evaluation is not possible."
+}

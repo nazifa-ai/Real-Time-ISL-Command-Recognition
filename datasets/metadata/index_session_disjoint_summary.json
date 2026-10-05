@@ -1,0 +1,12 @@
+{
+  "protocol": "session_disjoint",
+  "train": 652,
+  "val": 152,
+  "test": 154,
+  "classes_train": 50,
+  "classes_val": 50,
+  "classes_test": 50,
+  "val_strategy": "class-stratified recording-cluster-disjoint split over the full INCLUDE-50 pool (val=0.1, test=0.15, seed=42, max within-cluster id gap=10). Strongest defensible alternative to signer-disjoint evaluation, which INCLUDE metadata cannot support.",
+  "session_overlap_train_test": 1,
+  "note": "INCLUDE publishes no signer metadata -> signer-disjoint evaluation is not possible."
+}

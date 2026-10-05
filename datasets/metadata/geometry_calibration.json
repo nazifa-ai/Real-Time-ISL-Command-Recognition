@@ -1,0 +1,14 @@
+{
+  "shoulder_torso_ratio": 0.20225521754749376,
+  "face_vertical_over_interocular": 1.5823257754984326,
+  "videos_used": 200,
+  "frames_used": 12702,
+  "x_axis_scale_from_body": 3.2463933833786838,
+  "x_axis_scale_from_face": 3.020858677927515,
+  "x_axis_scale_theoretical": 3.1605,
+  "adopted_x_axis_scale": 3.1605,
+  "reference": {
+    "shoulder_torso_ratio": 0.6566,
+    "face_vertical_over_interocular": 0.5238
+  }
+}

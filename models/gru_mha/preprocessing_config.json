@@ -1,0 +1,40 @@
+{
+  "feature_dim": 225,
+  "model_input_dim": 225,
+  "mask_enabled": false,
+  "sequence_length": 30,
+  "seq_resample_method": "linear",
+  "min_valid_frames": 5,
+  "x_axis_scale": 3.1605,
+  "axis_correction_applied": true,
+  "normalisation": {
+    "origin": "mid-shoulder (fallback: mid-hip, then landmark centroid)",
+    "scale": "shoulder width (fallback: hip width, then 1.0)",
+    "x_axis_scale": 3.1605,
+    "axis_correction_applied": true
+  },
+  "augmentation": {
+    "enabled": true,
+    "jitter_sigma": 0.01,
+    "frame_drop_prob": 0.1,
+    "landmark_dropout_prob": 0.05,
+    "temporal_crop_frac": 0.1,
+    "mirror_prob": 0.0,
+    "augment_copies": 1
+  },
+  "layout": {
+    "pose": [
+      0,
+      33
+    ],
+    "left_hand": [
+      33,
+      54
+    ],
+    "right_hand": [
+      54,
+      75
+    ]
+  },
+  "split_protocol": "session_disjoint"
+}

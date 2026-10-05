@@ -1,0 +1,359 @@
+{
+  "dataset": "AI4Bharat INCLUDE-50",
+  "protocol": "official",
+  "citation": "Sridhar, A., Ganesan, R. G., Kumar, P., Khapra, M. (2020). INCLUDE: A Large Scale Dataset for Indian Sign Language Recognition. ACM Multimedia 2020.",
+  "doi": "10.1145/3394171.3413528",
+  "num_classes": 50,
+  "classes": [
+    {
+      "index": 0,
+      "label": "BANK",
+      "raw_word": "35. Bank",
+      "category": "Places",
+      "videos": 22
+    },
+    {
+      "index": 1,
+      "label": "BIG",
+      "raw_word": "83. big large",
+      "category": "Adjectives",
+      "videos": 21
+    },
+    {
+      "index": 2,
+      "label": "BIRD",
+      "raw_word": "4. Bird",
+      "category": "Animals",
+      "videos": 25
+    },
+    {
+      "index": 3,
+      "label": "BLACK",
+      "raw_word": "54. Black",
+      "category": "Colours",
+      "videos": 20
+    },
+    {
+      "index": 4,
+      "label": "BOY",
+      "raw_word": "77. Boy",
+      "category": "People",
+      "videos": 21
+    },
+    {
+      "index": 5,
+      "label": "BROTHER",
+      "raw_word": "66. Brother",
+      "category": "People",
+      "videos": 21
+    },
+    {
+      "index": 6,
+      "label": "CAR",
+      "raw_word": "11. Car",
+      "category": "Means of Transportation",
+      "videos": 20
+    },
+    {
+      "index": 7,
+      "label": "CELL_PHONE",
+      "raw_word": "54. Cell phone",
+      "category": "Electronics",
+      "videos": 14
+    },
+    {
+      "index": 8,
+      "label": "COURT",
+      "raw_word": "23. Court",
+      "category": "Places",
+      "videos": 23
+    },
+    {
+      "index": 9,
+      "label": "COW",
+      "raw_word": "5. Cow",
+      "category": "Animals",
+      "videos": 21
+    },
+    {
+      "index": 10,
+      "label": "DEATH",
+      "raw_word": "2. Death",
+      "category": "Society",
+      "videos": 14
+    },
+    {
+      "index": 11,
+      "label": "DOG",
+      "raw_word": "1. Dog",
+      "category": "Animals",
+      "videos": 20
+    },
+    {
+      "index": 12,
+      "label": "DRY",
+      "raw_word": "97. dry",
+      "category": "Adjectives",
+      "videos": 21
+    },
+    {
+      "index": 13,
+      "label": "ELECTION",
+      "raw_word": "14. Election",
+      "category": "Society",
+      "videos": 14
+    },
+    {
+      "index": 14,
+      "label": "FALL",
+      "raw_word": "64. Fall",
+      "category": "Seasons",
+      "videos": 15
+    },
+    {
+      "index": 15,
+      "label": "FAN",
+      "raw_word": "53. Fan",
+      "category": "Electronics",
+      "videos": 15
+    },
+    {
+      "index": 16,
+      "label": "FATHER",
+      "raw_word": "61. Father",
+      "category": "People",
+      "videos": 20
+    },
+    {
+      "index": 17,
+      "label": "GIRL",
+      "raw_word": "78. Girl",
+      "category": "People",
+      "videos": 20
+    },
+    {
+      "index": 18,
+      "label": "GOOD",
+      "raw_word": "94. good",
+      "category": "Adjectives",
+      "videos": 21
+    },
+    {
+      "index": 19,
+      "label": "GOOD_MORNING",
+      "raw_word": "51. Good Morning",
+      "category": "Greetings",
+      "videos": 21
+    },
+    {
+      "index": 20,
+      "label": "HAPPY",
+      "raw_word": "3. happy",
+      "category": "Adjectives",
+      "videos": 21
+    },
+    {
+      "index": 21,
+      "label": "HAT",
+      "raw_word": "37. Hat",
+      "category": "Clothes",
+      "videos": 20
+    },
+    {
+      "index": 22,
+      "label": "HELLO",
+      "raw_word": "48. Hello",
+      "category": "Greetings",
+      "videos": 21
+    },
+    {
+      "index": 23,
+      "label": "HOT",
+      "raw_word": "87. hot",
+      "category": "Adjectives",
+      "videos": 21
+    },
+    {
+      "index": 24,
+      "label": "HOUSE",
+      "raw_word": "19. House",
+      "category": "Places",
+      "videos": 21
+    },
+    {
+      "index": 25,
+      "label": "IT",
+      "raw_word": "44. it",
+      "category": "Pronouns",
+      "videos": 21
+    },
+    {
+      "index": 26,
+      "label": "LITTLE",
+      "raw_word": "84. small little",
+      "category": "Adjectives",
+      "videos": 22
+    },
+    {
+      "index": 27,
+      "label": "LONG",
+      "raw_word": "78. long",
+      "category": "Adjectives",
+      "videos": 21
+    },
+    {
+      "index": 28,
+      "label": "LOUD",
+      "raw_word": "1. loud",
+      "category": "Adjectives",
+      "videos": 21
+    },
+    {
+      "index": 29,
+      "label": "ME",
+      "raw_word": "40. I",
+      "category": "Pronouns",
+      "videos": 21
+    },
+    {
+      "index": 30,
+      "label": "MONDAY",
+      "raw_word": "67. Monday",
+      "category": "Days and Time",
+      "videos": 14
+    },
+    {
+      "index": 31,
+      "label": "NEW",
+      "raw_word": "91. new",
+      "category": "Adjectives",
+      "videos": 21
+    },
+    {
+      "index": 32,
+      "label": "PAINT",
+      "raw_word": "40. Paint",
+      "category": "Home",
+      "videos": 15
+    },
+    {
+      "index": 33,
+      "label": "PEN",
+      "raw_word": "34. Pen",
+      "category": "Home",
+      "videos": 14
+    },
+    {
+      "index": 34,
+      "label": "PRIEST",
+      "raw_word": "91. Priest",
+      "category": "Jobs",
+      "videos": 15
+    },
+    {
+      "index": 35,
+      "label": "QUIET",
+      "raw_word": "2. quiet",
+      "category": "Adjectives",
+      "videos": 21
+    },
+    {
+      "index": 36,
+      "label": "RED",
+      "raw_word": "47. Red",
+      "category": "Colours",
+      "videos": 20
+    },
+    {
+      "index": 37,
+      "label": "SHOE",
+      "raw_word": "44. Shoes",
+      "category": "Clothes",
+      "videos": 20
+    },
+    {
+      "index": 38,
+      "label": "SHOP",
+      "raw_word": "28. Store or Shop",
+      "category": "Places",
+      "videos": 22
+    },
+    {
+      "index": 39,
+      "label": "SHORT",
+      "raw_word": "79. short",
+      "category": "Adjectives",
+      "videos": 22
+    },
+    {
+      "index": 40,
+      "label": "SUMMER",
+      "raw_word": "61. Summer",
+      "category": "Seasons",
+      "videos": 14
+    },
+    {
+      "index": 41,
+      "label": "T-SHIRT",
+      "raw_word": "42. T-Shirt",
+      "category": "Clothes",
+      "videos": 20
+    },
+    {
+      "index": 42,
+      "label": "TEACHER",
+      "raw_word": "84. Teacher",
+      "category": "Jobs",
+      "videos": 14
+    },
+    {
+      "index": 43,
+      "label": "THANK_YOU",
+      "raw_word": "55. Thank you",
+      "category": "Greetings",
+      "videos": 21
+    },
+    {
+      "index": 44,
+      "label": "TIME",
+      "raw_word": "86. Time",
+      "category": "Days and Time",
+      "videos": 15
+    },
+    {
+      "index": 45,
+      "label": "TRAIN_TICKET",
+      "raw_word": "16. train ticket",
+      "category": "Means of Transportation",
+      "videos": 21
+    },
+    {
+      "index": 46,
+      "label": "WHITE",
+      "raw_word": "55. White",
+      "category": "Colours",
+      "videos": 20
+    },
+    {
+      "index": 47,
+      "label": "WINDOW",
+      "raw_word": "28. Window",
+      "category": "Home",
+      "videos": 14
+    },
+    {
+      "index": 48,
+      "label": "YEAR",
+      "raw_word": "78. Year",
+      "category": "Days and Time",
+      "videos": 15
+    },
+    {
+      "index": 49,
+      "label": "YOU_PLURAL",
+      "raw_word": "46. you (plural)",
+      "category": "Pronouns",
+      "videos": 21
+    }
+  ]
+}

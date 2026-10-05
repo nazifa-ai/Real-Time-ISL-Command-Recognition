@@ -1,0 +1,47 @@
+# ISL Recognition - verified requirement set.
+#
+# These are the *exact* versions the project was developed and tested against
+# (Python 3.13.14, Linux x86_64, CPU-only).  See docs/setup.md for the tested
+# environment and the notes about MediaPipe's API change in 1.x.
+
+# --- core numerics -------------------------------------------------------
+numpy==2.3.5
+pandas==2.2.3
+scikit-learn==1.6.1
+
+# --- deep learning -------------------------------------------------------
+# TensorFlow 2.21 provides the Keras 3 API used for LSTM / GRU / MultiHeadAttention.
+tensorflow==2.21.0
+
+# --- vision / landmark extraction ---------------------------------------
+# MediaPipe 1.0.1 has NO mediapipe.solutions API: landmark extraction uses the
+# Tasks API with .task model bundles (scripts/download_models.py).
+mediapipe==1.0.1
+# opencv-python-headless has NO GUI: fine for uploads/batch/dataset work, but the
+# `backend/inference/realtime.py` preview window needs the full build.  For a local desktop
+# webcam session install: pip install opencv-python==5.0.0
+opencv-python-headless==5.0.0.93
+
+# --- backend / frontend --------------------------------------------------
+fastapi==0.141.1
+uvicorn==0.53.0
+pydantic==2.13.4
+python-multipart==0.0.32
+requests==2.33.0
+httpx==0.28.1
+
+# --- configuration / utilities -------------------------------------------
+python-dotenv==1.2.3
+tqdm==4.69.0
+pyarrow==25.0.1
+
+# --- text to speech (optional at runtime; the app degrades gracefully) ----
+gTTS==2.5.4
+
+# --- visualisation -------------------------------------------------------
+matplotlib==3.10.9
+seaborn==0.13.2
+
+# --- testing -------------------------------------------------------------
+pytest==9.0.3
+pytest-asyncio==1.4.0

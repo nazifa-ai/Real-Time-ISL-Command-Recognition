@@ -1,0 +1,4 @@
+model,protocol,split,n_samples,n_classes,parameters,accuracy,macro_precision,macro_recall,macro_f1,weighted_precision,weighted_recall,weighted_f1,latency_ms_mean,latency_ms_p50,latency_ms_p95,latency_ms_batch_per_sample,throughput_fps,batch_throughput_fps
+lstm,session_disjoint,test,154,50,245426,0.662338,0.601857,0.656667,0.596857,0.606787,0.662338,0.602505,2.759733,2.8178,3.40901,1.130059,362.35385,884.909478
+gru,session_disjoint,test,154,50,188338,0.62987,0.562143,0.626667,0.558786,0.56897,0.62987,0.564268,2.4262,2.1708,2.90673,1.271062,412.167175,786.743877
+gru_mha,session_disjoint,test,154,50,263026,0.772727,0.721405,0.766667,0.718195,0.728641,0.772727,0.725514,2.729167,2.6584,3.11587,1.726539,366.412214,579.193417

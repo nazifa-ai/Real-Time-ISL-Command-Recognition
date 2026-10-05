@@ -1,0 +1,38 @@
+# FastAPI serves both the prediction API and browser dashboard.
+#
+#   docker compose up --build            # API + dashboard on :8000
+#   docker compose run --rm api python training/audit_dataset.py
+#   docker compose run --rm api python training/evaluate_models.py
+#
+# WEBCAM: a container has no /dev/video0, and a browser camera belongs to the host.
+# Local webcam recognition is therefore NOT available inside Docker.  Two supported
+# fallbacks:
+#   1) run it on the host against the same checkout (recommended, full 30 fps):
+#          python backend/inference/realtime.py
+#   2) use the browser dashboard for video upload, dataset demo, or browser-camera capture.
+services:
+  api:
+    build: .
+    image: isl-recognition:latest
+    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    environment:
+      ISL_SPLIT_PROTOCOL: ${ISL_SPLIT_PROTOCOL:-session_disjoint}
+      ISL_DEFAULT_MODEL: ${ISL_DEFAULT_MODEL:-gru_mha}
+      ISL_CONFIDENCE_THRESHOLD: ${ISL_CONFIDENCE_THRESHOLD:-0.70}
+      ISL_PERSIST_UPLOADS: "false"
+      ISL_TTS_ENABLED: "false"          # no sound device in the container
+      API_RATE_LIMIT_PER_MIN: "240"
+    volumes:
+      # artefacts and logs stay on the host so they survive rebuilds
+      - ./models:/app/models
+      - ./datasets:/app/datasets
+      - ./results:/app/results
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+

@@ -1,0 +1,1720 @@
+{
+  "generated_utc": "2026-09-22T09:53:21.099875+00:00",
+  "protocol": "session_disjoint",
+  "num_classes": 50,
+  "vocabulary": [
+    "BANK",
+    "BIG",
+    "BIRD",
+    "BLACK",
+    "BOY",
+    "BROTHER",
+    "CAR",
+    "CELL_PHONE",
+    "COURT",
+    "COW",
+    "DEATH",
+    "DOG",
+    "DRY",
+    "ELECTION",
+    "FALL",
+    "FAN",
+    "FATHER",
+    "GIRL",
+    "GOOD",
+    "GOOD_MORNING",
+    "HAPPY",
+    "HAT",
+    "HELLO",
+    "HOT",
+    "HOUSE",
+    "IT",
+    "LITTLE",
+    "LONG",
+    "LOUD",
+    "ME",
+    "MONDAY",
+    "NEW",
+    "PAINT",
+    "PEN",
+    "PRIEST",
+    "QUIET",
+    "RED",
+    "SHOE",
+    "SHOP",
+    "SHORT",
+    "SUMMER",
+    "T-SHIRT",
+    "TEACHER",
+    "THANK_YOU",
+    "TIME",
+    "TRAIN_TICKET",
+    "WHITE",
+    "WINDOW",
+    "YEAR",
+    "YOU_PLURAL"
+  ],
+  "total_videos": 958,
+  "usable_videos": 958,
+  "corrupt_videos": [],
+  "corrupt_by_class": {},
+  "splits": {
+    "train": 652,
+    "val": 152,
+    "test": 154
+  },
+  "val_strategy": "class-stratified recording-cluster-disjoint split over the full INCLUDE-50 pool (val=0.1, test=0.15, seed=42, max within-cluster id gap=10). Strongest defensible alternative to signer-disjoint evaluation, which INCLUDE metadata cannot support.",
+  "session_overlap_train_test": 1,
+  "official_session_overlap": 13,
+  "official_test_sessions": 189,
+  "first_download_damage": {
+    "total_entries": 4284,
+    "damaged_entries": 73,
+    "include50_impact": 21,
+    "affected_classes": {
+      "Adjectives/79. short": 22,
+      "Adjectives/95. bad": 21,
+      "Adjectives/12. poor": 8,
+      "Adjectives/29. clean": 8,
+      "Adjectives/34. alive": 8,
+      "Adjectives/25. soft": 5,
+      "Adjectives/93. young": 1
+    },
+    "likely_cause": "interrupted transfer (two overlapping curl processes writing the same file)",
+    "resolution": "full re-download, per-entry CRC verification, 0 damaged entries remaining"
+  },
+  "duplicate_filepaths": 0,
+  "train_test_path_overlap": 0,
+  "classes_train_only": [],
+  "classes_test_only": [],
+  "near_duplicate_pairs": [
+    [
+      "RED",
+      "Colours/47. Red/MVI_3720.MOV",
+      "Colours/47. Red/MVI_3719.MOV",
+      0.9999811053276062,
+      "train",
+      "train"
+    ],
+    [
+      "SUMMER",
+      "Seasons/61. Summer/MVI_9123.MP4",
+      "Seasons/61. Summer/MVI_9122.MP4",
+      0.9999662041664124,
+      "test",
+      "test"
+    ],
+    [
+      "NEW",
+      "Adjectives/91. new/MVI_9340.MOV",
+      "Adjectives/91. new/MVI_9342.MOV",
+      0.9999615550041199,
+      "val",
+      "val"
+    ],
+    [
+      "FALL",
+      "Seasons/64. Fall/MVI_9133.MP4",
+      "Seasons/64. Fall/MVI_9132.MP4",
+      0.9999596476554871,
+      "val",
+      "val"
+    ],
+    [
+      "DOG",
+      "Animals/1. Dog/MVI_3059.MOV",
+      "Animals/1. Dog/MVI_3060.MOV",
+      0.9999446868896484,
+      "test",
+      "test"
+    ],
+    [
+      "NEW",
+      "Adjectives/91. new/MVI_9502.MOV",
+      "Adjectives/91. new/MVI_9501.MOV",
+      0.9999291300773621,
+      "test",
+      "test"
+    ],
+    [
+      "FALL",
+      "Seasons/64. Fall/MVI_9133.MP4",
+      "Seasons/64. Fall/MVI_9135.MP4",
+      0.9999170303344727,
+      "val",
+      "val"
+    ],
+    [
+      "HAT",
+      "Clothes/37. Hat/MVI_3985.MOV",
+      "Clothes/37. Hat/MVI_3984.MOV",
+      0.9999170303344727,
+      "val",
+      "val"
+    ],
+    [
+      "BIRD",
+      "Animals/4. Bird/Extra/MVI_3045.MOV",
+      "Animals/4. Bird/Extra/MVI_3044.MOV",
+      0.999916136264801,
+      "train",
+      "train"
+    ],
+    [
+      "YOU_PLURAL",
+      "Pronouns/46. you (plural)/MVI_9909.MOV",
+      "Pronouns/46. you (plural)/MVI_9907.MOV",
+      0.9999150037765503,
+      "train",
+      "train"
+    ],
+    [
+      "PEN",
+      "Home/34. Pen/MVI_4387.MOV",
+      "Home/34. Pen/MVI_4390.MOV",
+      0.999911904335022,
+      "train",
+      "train"
+    ],
+    [
+      "YOU_PLURAL",
+      "Pronouns/46. you (plural)/MVI_9946.MOV",
+      "Pronouns/46. you (plural)/MVI_9948.MOV",
+      0.9999080896377563,
+      "train",
+      "train"
+    ],
+    [
+      "FALL",
+      "Seasons/64. Fall/MVI_9135.MP4",
+      "Seasons/64. Fall/MVI_9132.MP4",
+      0.9999063611030579,
+      "val",
+      "val"
+    ],
+    [
+      "NEW",
+      "Adjectives/91. new/MVI_5231.MOV",
+      "Adjectives/91. new/MVI_5230.MOV",
+      0.9999025464057922,
+      "train",
+      "train"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/MVI_3635.MOV",
+      "Places/28. Store or Shop/Extra/MVI_3636.MOV",
+      0.9999009966850281,
+      "train",
+      "train"
+    ],
+    [
+      "ME",
+      "Pronouns/40. I/MVI_9881.MOV",
+      "Pronouns/40. I/MVI_9880.MOV",
+      0.9998937249183655,
+      "train",
+      "train"
+    ],
+    [
+      "RED",
+      "Colours/47. Red/MVI_4019.MOV",
+      "Colours/47. Red/MVI_4018.MOV",
+      0.9998930096626282,
+      "val",
+      "val"
+    ],
+    [
+      "PRIEST",
+      "Jobs/91. Priest/MVI_4770.MOV",
+      "Jobs/91. Priest/MVI_4771.MOV",
+      0.9998914003372192,
+      "test",
+      "test"
+    ],
+    [
+      "RED",
+      "Colours/47. Red/MVI_5184.MOV",
+      "Colours/47. Red/MVI_5185.MOV",
+      0.9998875856399536,
+      "train",
+      "train"
+    ],
+    [
+      "SUMMER",
+      "Seasons/61. Summer/MVI_9124.MP4",
+      "Seasons/61. Summer/MVI_9123.MP4",
+      0.9998874664306641,
+      "test",
+      "test"
+    ],
+    [
+      "GOOD_MORNING",
+      "Greetings/51. Good Morning/MVI_9933.MOV",
+      "Greetings/51. Good Morning/MVI_9932.MOV",
+      0.9998853206634521,
+      "train",
+      "train"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/MVI_3633.MOV",
+      "Places/28. Store or Shop/MVI_3634.MOV",
+      0.9998852610588074,
+      "train",
+      "train"
+    ],
+    [
+      "LITTLE",
+      "Adjectives/84. small little/MVI_9480.MOV",
+      "Adjectives/84. small little/MVI_9478.MOV",
+      0.9998844265937805,
+      "test",
+      "test"
+    ],
+    [
+      "RED",
+      "Colours/47. Red/MVI_4017.MOV",
+      "Colours/47. Red/MVI_4018.MOV",
+      0.9998816847801208,
+      "val",
+      "val"
+    ],
+    [
+      "BROTHER",
+      "People/66. Brother/MVI_5244.MOV",
+      "People/66. Brother/MVI_5243.MOV",
+      0.9998806118965149,
+      "test",
+      "test"
+    ],
+    [
+      "BIG",
+      "Adjectives/83. big large/MVI_9233.MOV",
+      "Adjectives/83. big large/MVI_9234.MOV",
+      0.9998804330825806,
+      "train",
+      "train"
+    ],
+    [
+      "QUIET",
+      "Adjectives/2. quiet/MVI_9292.MOV",
+      "Adjectives/2. quiet/MVI_9293.MOV",
+      0.999880313873291,
+      "train",
+      "train"
+    ],
+    [
+      "CELL_PHONE",
+      "Electronics/54. Cell phone/MVI_5391.MOV",
+      "Electronics/54. Cell phone/MVI_5392.MOV",
+      0.9998725056648254,
+      "train",
+      "train"
+    ],
+    [
+      "LONG",
+      "Adjectives/78. long/MVI_9458.MOV",
+      "Adjectives/78. long/MVI_9459.MOV",
+      0.9998723864555359,
+      "train",
+      "train"
+    ],
+    [
+      "BIRD",
+      "Animals/4. Bird/Extra/MVI_3043.MOV",
+      "Animals/4. Bird/Extra/MVI_3041.MOV",
+      0.9998669624328613,
+      "train",
+      "train"
+    ],
+    [
+      "RED",
+      "Colours/47. Red/MVI_4897.MOV",
+      "Colours/47. Red/MVI_4898.MOV",
+      0.9998647570610046,
+      "test",
+      "test"
+    ],
+    [
+      "SUMMER",
+      "Seasons/61. Summer/MVI_9124.MP4",
+      "Seasons/61. Summer/MVI_9122.MP4",
+      0.9998645186424255,
+      "test",
+      "test"
+    ],
+    [
+      "BIRD",
+      "Animals/4. Bird/MVI_3071.MOV",
+      "Animals/4. Bird/MVI_3072.MOV",
+      0.9998639225959778,
+      "train",
+      "train"
+    ],
+    [
+      "HAPPY",
+      "Adjectives/3. happy/MVI_9540.MOV",
+      "Adjectives/3. happy/MVI_9541.MOV",
+      0.9998602867126465,
+      "train",
+      "train"
+    ],
+    [
+      "DEATH",
+      "Society/2. Death/MVI_8662.MP4",
+      "Society/2. Death/MVI_8663.MP4",
+      0.9998599290847778,
+      "train",
+      "train"
+    ],
+    [
+      "BROTHER",
+      "People/66. Brother/MVI_3928.MOV",
+      "People/66. Brother/MVI_3927.MOV",
+      0.9998587965965271,
+      "val",
+      "val"
+    ],
+    [
+      "HELLO",
+      "Greetings/48. Hello/MVI_9916.MOV",
+      "Greetings/48. Hello/MVI_9915.MOV",
+      0.9998567700386047,
+      "train",
+      "train"
+    ],
+    [
+      "BANK",
+      "Places/35. Bank/Extra/MVI_3339.MOV",
+      "Places/35. Bank/MVI_3338.MOV",
+      0.9998556971549988,
+      "train",
+      "train"
+    ],
+    [
+      "HELLO",
+      "Greetings/48. Hello/MVI_9917.MOV",
+      "Greetings/48. Hello/MVI_9916.MOV",
+      0.9998530745506287,
+      "train",
+      "train"
+    ],
+    [
+      "SHOE",
+      "Clothes/44. Shoes/MVI_3857.MOV",
+      "Clothes/44. Shoes/MVI_3858.MOV",
+      0.9998483061790466,
+      "train",
+      "train"
+    ],
+    [
+      "PEN",
+      "Home/34. Pen/MVI_8794.MP4",
+      "Home/34. Pen/MVI_8795.MP4",
+      0.9998478889465332,
+      "train",
+      "train"
+    ],
+    [
+      "WINDOW",
+      "Home/28. Window/MVI_9014.MP4",
+      "Home/28. Window/MVI_9015.MP4",
+      0.9998458623886108,
+      "val",
+      "val"
+    ],
+    [
+      "QUIET",
+      "Adjectives/2. quiet/MVI_5340.MOV",
+      "Adjectives/2. quiet/MVI_5339.MOV",
+      0.9998414516448975,
+      "train",
+      "train"
+    ],
+    [
+      "COURT",
+      "Places/23. Court/MVI_3609.MOV",
+      "Places/23. Court/MVI_3612.MOV",
+      0.9998407959938049,
+      "train",
+      "train"
+    ],
+    [
+      "SHOE",
+      "Clothes/44. Shoes/MVI_5177.MOV",
+      "Clothes/44. Shoes/MVI_5176.MOV",
+      0.9998347759246826,
+      "train",
+      "train"
+    ],
+    [
+      "QUIET",
+      "Adjectives/2. quiet/MVI_9373.MOV",
+      "Adjectives/2. quiet/MVI_9372.MOV",
+      0.9998311400413513,
+      "train",
+      "train"
+    ],
+    [
+      "RED",
+      "Colours/47. Red/MVI_3866.MOV",
+      "Colours/47. Red/MVI_3868.MOV",
+      0.9998307824134827,
+      "train",
+      "train"
+    ],
+    [
+      "BLACK",
+      "Colours/54. Black/MVI_5208.MOV",
+      "Colours/54. Black/MVI_5207.MOV",
+      0.9998306035995483,
+      "train",
+      "train"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/Extra/MVI_3636.MOV",
+      "Places/28. Store or Shop/MVI_3634.MOV",
+      0.9998302459716797,
+      "train",
+      "train"
+    ],
+    [
+      "GOOD",
+      "Adjectives/94. good/MVI_5318.MOV",
+      "Adjectives/94. good/MVI_5316.MOV",
+      0.9998295307159424,
+      "train",
+      "train"
+    ],
+    [
+      "TRAIN_TICKET",
+      "Means_of_Transportation/16. train ticket/MVI_3197.MOV",
+      "Means_of_Transportation/16. train ticket/MVI_3195.MOV",
+      0.9998294115066528,
+      "train",
+      "train"
+    ],
+    [
+      "LITTLE",
+      "Adjectives/84. small little/MVI_5286.MOV",
+      "Adjectives/84. small little/MVI_5287.MOV",
+      0.9998237490653992,
+      "train",
+      "train"
+    ],
+    [
+      "SHORT",
+      "Adjectives/79. short/MVI_5269.MOV",
+      "Adjectives/79. short/MVI_5270.MOV",
+      0.9998226165771484,
+      "train",
+      "train"
+    ],
+    [
+      "BROTHER",
+      "People/66. Brother/MVI_3780.MOV",
+      "People/66. Brother/MVI_3778.MOV",
+      0.999815821647644,
+      "train",
+      "train"
+    ],
+    [
+      "BLACK",
+      "Colours/54. Black/MVI_5208.MOV",
+      "Colours/54. Black/MVI_5206.MOV",
+      0.9998157024383545,
+      "train",
+      "train"
+    ],
+    [
+      "PRIEST",
+      "Jobs/91. Priest/MVI_8887.MP4",
+      "Jobs/91. Priest/MVI_8888.MP4",
+      0.9998130798339844,
+      "val",
+      "val"
+    ],
+    [
+      "LITTLE",
+      "Adjectives/84. small little/MVI_5208.MOV",
+      "Adjectives/84. small little/MVI_5207.MOV",
+      0.9998124241828918,
+      "train",
+      "train"
+    ],
+    [
+      "FAN",
+      "Electronics/53. Fan/MVI_4534.MOV",
+      "Electronics/53. Fan/MVI_4533.MOV",
+      0.9998093247413635,
+      "train",
+      "train"
+    ],
+    [
+      "COURT",
+      "Places/23. Court/MVI_3609.MOV",
+      "Places/23. Court/Extra/MVI_3613.MOV",
+      0.9998091459274292,
+      "train",
+      "train"
+    ],
+    [
+      "BIRD",
+      "Animals/4. Bird/MVI_3037.MOV",
+      "Animals/4. Bird/MVI_3038.MOV",
+      0.9998074769973755,
+      "train",
+      "train"
+    ],
+    [
+      "DOG",
+      "Animals/1. Dog/MVI_3061.MOV",
+      "Animals/1. Dog/MVI_3060.MOV",
+      0.9998055100440979,
+      "test",
+      "test"
+    ],
+    [
+      "DRY",
+      "Adjectives/97. dry/MVI_9523.MOV",
+      "Adjectives/97. dry/MVI_9522.MOV",
+      0.9997984170913696,
+      "train",
+      "train"
+    ],
+    [
+      "PEN",
+      "Home/34. Pen/MVI_4389.MOV",
+      "Home/34. Pen/MVI_4390.MOV",
+      0.9997981786727905,
+      "train",
+      "train"
+    ],
+    [
+      "GOOD",
+      "Adjectives/94. good/MVI_5318.MOV",
+      "Adjectives/94. good/MVI_5317.MOV",
+      0.9997931718826294,
+      "train",
+      "train"
+    ],
+    [
+      "FALL",
+      "Seasons/64. Fall/MVI_9134.MP4",
+      "Seasons/64. Fall/MVI_9132.MP4",
+      0.9997912645339966,
+      "val",
+      "val"
+    ],
+    [
+      "GIRL",
+      "People/78. Girl/MVI_3967.MOV",
+      "People/78. Girl/MVI_3965.MOV",
+      0.9997906684875488,
+      "train",
+      "train"
+    ],
+    [
+      "TRAIN_TICKET",
+      "Means_of_Transportation/16. train ticket/MVI_3196.MOV",
+      "Means_of_Transportation/16. train ticket/MVI_3197.MOV",
+      0.9997849464416504,
+      "train",
+      "train"
+    ],
+    [
+      "BANK",
+      "Places/35. Bank/MVI_3662.MOV",
+      "Places/35. Bank/MVI_3664.MOV",
+      0.9997844099998474,
+      "test",
+      "test"
+    ],
+    [
+      "DOG",
+      "Animals/1. Dog/MVI_3059.MOV",
+      "Animals/1. Dog/MVI_3061.MOV",
+      0.9997811913490295,
+      "test",
+      "test"
+    ],
+    [
+      "PEN",
+      "Home/34. Pen/MVI_9033.MP4",
+      "Home/34. Pen/MVI_9034.MP4",
+      0.9997754693031311,
+      "val",
+      "val"
+    ],
+    [
+      "SHORT",
+      "Adjectives/79. short/MVI_5269.MOV",
+      "Adjectives/79. short/MVI_5271.MOV",
+      0.9997720718383789,
+      "train",
+      "train"
+    ],
+    [
+      "SHORT",
+      "Adjectives/79. short/MVI_5190.MOV",
+      "Adjectives/79. short/MVI_5189.MOV",
+      0.999771773815155,
+      "train",
+      "train"
+    ],
+    [
+      "TRAIN_TICKET",
+      "Means_of_Transportation/16. train ticket/MVI_3164.MOV",
+      "Means_of_Transportation/16. train ticket/MVI_3163.MOV",
+      0.9997684359550476,
+      "test",
+      "test"
+    ],
+    [
+      "TRAIN_TICKET",
+      "Means_of_Transportation/16. train ticket/MVI_3255.MOV",
+      "Means_of_Transportation/16. train ticket/MVI_3254.MOV",
+      0.9997683763504028,
+      "train",
+      "train"
+    ],
+    [
+      "SUMMER",
+      "Seasons/61. Summer/MVI_4990.MOV",
+      "Seasons/61. Summer/MVI_4991.MOV",
+      0.9997673630714417,
+      "val",
+      "val"
+    ],
+    [
+      "NEW",
+      "Adjectives/91. new/MVI_9261.MOV",
+      "Adjectives/91. new/MVI_9260.MOV",
+      0.999765157699585,
+      "train",
+      "train"
+    ],
+    [
+      "BIRD",
+      "Animals/4. Bird/MVI_3094.MOV",
+      "Animals/4. Bird/MVI_3095.MOV",
+      0.9997611045837402,
+      "train",
+      "train"
+    ],
+    [
+      "SHORT",
+      "Adjectives/79. short/MVI_9221.MOV",
+      "Adjectives/79. short/MVI_9220.MOV",
+      0.999760091304779,
+      "train",
+      "train"
+    ],
+    [
+      "IT",
+      "Pronouns/44. it/MVI_9898.MOV",
+      "Pronouns/44. it/MVI_9897.MOV",
+      0.9997535943984985,
+      "train",
+      "train"
+    ],
+    [
+      "RED",
+      "Colours/47. Red/MVI_4017.MOV",
+      "Colours/47. Red/MVI_4019.MOV",
+      0.9997522234916687,
+      "val",
+      "val"
+    ],
+    [
+      "LITTLE",
+      "Adjectives/84. small little/MVI_9237.MOV",
+      "Adjectives/84. small little/MVI_9238.MOV",
+      0.999750554561615,
+      "train",
+      "train"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/MVI_3635.MOV",
+      "Places/28. Store or Shop/MVI_3634.MOV",
+      0.9997450113296509,
+      "train",
+      "train"
+    ],
+    [
+      "WHITE",
+      "Colours/55. White/MVI_3892.MOV",
+      "Colours/55. White/MVI_3890.MOV",
+      0.9997447729110718,
+      "train",
+      "train"
+    ],
+    [
+      "PAINT",
+      "Home/40. Paint/MVI_9051.MP4",
+      "Home/40. Paint/MVI_9052.MP4",
+      0.9997440576553345,
+      "val",
+      "val"
+    ],
+    [
+      "IT",
+      "Pronouns/44. it/MVI_0014.MOV",
+      "Pronouns/44. it/MVI_0015.MOV",
+      0.9997434616088867,
+      "train",
+      "train"
+    ],
+    [
+      "BANK",
+      "Places/35. Bank/MVI_3663.MOV",
+      "Places/35. Bank/MVI_3664.MOV",
+      0.9997409582138062,
+      "test",
+      "test"
+    ],
+    [
+      "IT",
+      "Pronouns/44. it/MVI_0026.MOV",
+      "Pronouns/44. it/MVI_0024.MOV",
+      0.999739408493042,
+      "train",
+      "train"
+    ],
+    [
+      "COW",
+      "Animals/5. Cow/MVI_3097.MOV",
+      "Animals/5. Cow/MVI_3099.MOV",
+      0.9997382760047913,
+      "train",
+      "train"
+    ],
+    [
+      "DEATH",
+      "Society/2. Death/MVI_8661.MP4",
+      "Society/2. Death/MVI_8662.MP4",
+      0.9997373819351196,
+      "train",
+      "train"
+    ],
+    [
+      "BROTHER",
+      "People/66. Brother/MVI_5245.MOV",
+      "People/66. Brother/MVI_5243.MOV",
+      0.9997365474700928,
+      "test",
+      "test"
+    ],
+    [
+      "THANK_YOU",
+      "Greetings/55. Thank you/MVI_9949.MOV",
+      "Greetings/55. Thank you/MVI_9948.MOV",
+      0.9997327923774719,
+      "train",
+      "train"
+    ],
+    [
+      "BIRD",
+      "Animals/4. Bird/MVI_3013.MOV",
+      "Animals/4. Bird/MVI_3012.MOV",
+      0.9997326731681824,
+      "train",
+      "train"
+    ],
+    [
+      "TIME",
+      "Days_and_Time/86. Time/MVI_9204.MP4",
+      "Days_and_Time/86. Time/MVI_9203.MP4",
+      0.999728798866272,
+      "train",
+      "train"
+    ],
+    [
+      "HELLO",
+      "Greetings/48. Hello/MVI_9956.MOV",
+      "Greetings/48. Hello/MVI_9954.MOV",
+      0.9997283816337585,
+      "train",
+      "train"
+    ],
+    [
+      "COURT",
+      "Places/23. Court/Extra/MVI_3613.MOV",
+      "Places/23. Court/MVI_3612.MOV",
+      0.9997277855873108,
+      "train",
+      "train"
+    ],
+    [
+      "GOOD_MORNING",
+      "Greetings/51. Good Morning/MVI_9993.MOV",
+      "Greetings/51. Good Morning/MVI_9992.MOV",
+      0.9997270703315735,
+      "val",
+      "val"
+    ],
+    [
+      "IT",
+      "Pronouns/44. it/MVI_9936.MOV",
+      "Pronouns/44. it/MVI_9937.MOV",
+      0.9997187256813049,
+      "train",
+      "train"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/MVI_3386.MOV",
+      "Places/28. Store or Shop/MVI_3385.MOV",
+      0.9997178912162781,
+      "train",
+      "train"
+    ],
+    [
+      "GOOD_MORNING",
+      "Greetings/51. Good Morning/MVI_0047.MOV",
+      "Greetings/51. Good Morning/MVI_0046.MOV",
+      0.9997177720069885,
+      "train",
+      "train"
+    ],
+    [
+      "TRAIN_TICKET",
+      "Means_of_Transportation/16. train ticket/MVI_3226.MOV",
+      "Means_of_Transportation/16. train ticket/MVI_3225.MOV",
+      0.9997175335884094,
+      "train",
+      "train"
+    ],
+    [
+      "THANK_YOU",
+      "Greetings/55. Thank you/MVI_9987.MOV",
+      "Greetings/55. Thank you/MVI_9984.MOV",
+      0.999715268611908,
+      "train",
+      "train"
+    ],
+    [
+      "DOG",
+      "Animals/1. Dog/MVI_2978.MOV",
+      "Animals/1. Dog/MVI_2980.MOV",
+      0.999710738658905,
+      "train",
+      "train"
+    ],
+    [
+      "TEACHER",
+      "Jobs/84. Teacher/MVI_5311.MOV",
+      "Jobs/84. Teacher/MVI_5312.MOV",
+      0.9997084736824036,
+      "train",
+      "train"
+    ],
+    [
+      "CELL_PHONE",
+      "Electronics/54. Cell phone/MVI_9102.MP4",
+      "Electronics/54. Cell phone/MVI_9101.MP4",
+      0.9997045397758484,
+      "val",
+      "val"
+    ],
+    [
+      "COW",
+      "Animals/5. Cow/MVI_3075.MOV",
+      "Animals/5. Cow/MVI_3073.MOV",
+      0.9997041821479797,
+      "train",
+      "train"
+    ],
+    [
+      "HOUSE",
+      "Places/19. House/MVI_3436.MOV",
+      "Places/19. House/MVI_3437.MOV",
+      0.9997032880783081,
+      "train",
+      "train"
+    ],
+    [
+      "FALL",
+      "Seasons/64. Fall/MVI_4999.MOV",
+      "Seasons/64. Fall/MVI_5001.MOV",
+      0.9997010231018066,
+      "test",
+      "test"
+    ],
+    [
+      "T-SHIRT",
+      "Clothes/42. T-Shirt/MVI_3851.MOV",
+      "Clothes/42. T-Shirt/MVI_3850.MOV",
+      0.9997009038925171,
+      "train",
+      "train"
+    ],
+    [
+      "THANK_YOU",
+      "Greetings/55. Thank you/MVI_0007.MOV",
+      "Greetings/55. Thank you/MVI_0008.MOV",
+      0.999699056148529,
+      "val",
+      "val"
+    ],
+    [
+      "HAPPY",
+      "Adjectives/3. happy/MVI_9540.MOV",
+      "Adjectives/3. happy/MVI_9542.MOV",
+      0.999697744846344,
+      "train",
+      "train"
+    ],
+    [
+      "PEN",
+      "Home/34. Pen/MVI_4389.MOV",
+      "Home/34. Pen/MVI_4387.MOV",
+      0.9996976256370544,
+      "train",
+      "train"
+    ],
+    [
+      "BANK",
+      "Places/35. Bank/MVI_3662.MOV",
+      "Places/35. Bank/MVI_3663.MOV",
+      0.9996964931488037,
+      "test",
+      "test"
+    ],
+    [
+      "LOUD",
+      "Adjectives/1. loud/MVI_9450.MOV",
+      "Adjectives/1. loud/MVI_9449.MOV",
+      0.9996957778930664,
+      "train",
+      "train"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/MVI_3632.MOV",
+      "Places/28. Store or Shop/MVI_3633.MOV",
+      0.9996917247772217,
+      "train",
+      "train"
+    ],
+    [
+      "GIRL",
+      "People/78. Girl/MVI_3817.MOV",
+      "People/78. Girl/MVI_3818.MOV",
+      0.9996916055679321,
+      "test",
+      "test"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/MVI_3633.MOV",
+      "Places/28. Store or Shop/Extra/MVI_3636.MOV",
+      0.9996911883354187,
+      "train",
+      "train"
+    ],
+    [
+      "FATHER",
+      "People/61. Father/MVI_3763.MOV",
+      "People/61. Father/MVI_3764.MOV",
+      0.9996866583824158,
+      "train",
+      "train"
+    ],
+    [
+      "HELLO",
+      "Greetings/48. Hello/MVI_0089.MOV",
+      "Greetings/48. Hello/MVI_0090.MOV",
+      0.9996862411499023,
+      "val",
+      "val"
+    ],
+    [
+      "BOY",
+      "People/77. Boy/MVI_5286.MOV",
+      "People/77. Boy/MVI_5287.MOV",
+      0.9996862411499023,
+      "train",
+      "train"
+    ],
+    [
+      "BOY",
+      "People/77. Boy/MVI_4110.MOV",
+      "People/77. Boy/MVI_4112.MOV",
+      0.9996858239173889,
+      "train",
+      "train"
+    ],
+    [
+      "BLACK",
+      "Colours/54. Black/MVI_4039.MOV",
+      "Colours/54. Black/MVI_4040.MOV",
+      0.9996833205223083,
+      "train",
+      "train"
+    ],
+    [
+      "WHITE",
+      "Colours/55. White/MVI_5061.MOV",
+      "Colours/55. White/MVI_5062.MOV",
+      0.9996795058250427,
+      "test",
+      "test"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/MVI_3473.MOV",
+      "Places/28. Store or Shop/MVI_3472.MOV",
+      0.9996781349182129,
+      "train",
+      "train"
+    ],
+    [
+      "BLACK",
+      "Colours/54. Black/MVI_5206.MOV",
+      "Colours/54. Black/MVI_5207.MOV",
+      0.999673068523407,
+      "train",
+      "train"
+    ],
+    [
+      "WHITE",
+      "Colours/55. White/MVI_3745.MOV",
+      "Colours/55. White/MVI_3744.MOV",
+      0.9996728897094727,
+      "train",
+      "train"
+    ],
+    [
+      "BIRD",
+      "Animals/4. Bird/MVI_3040.MOV",
+      "Animals/4. Bird/Extra/MVI_3043.MOV",
+      0.9996722936630249,
+      "train",
+      "train"
+    ],
+    [
+      "BROTHER",
+      "People/66. Brother/MVI_5245.MOV",
+      "People/66. Brother/MVI_5244.MOV",
+      0.9996674060821533,
+      "test",
+      "test"
+    ],
+    [
+      "YOU_PLURAL",
+      "Pronouns/46. you (plural)/MVI_9945.MOV",
+      "Pronouns/46. you (plural)/MVI_9948.MOV",
+      0.9996673464775085,
+      "train",
+      "train"
+    ],
+    [
+      "COURT",
+      "Places/23. Court/MVI_3610.MOV",
+      "Places/23. Court/MVI_3611.MOV",
+      0.9996644854545593,
+      "train",
+      "train"
+    ],
+    [
+      "COURT",
+      "Places/23. Court/Extra/MVI_3288.MOV",
+      "Places/23. Court/MVI_3286.MOV",
+      0.9996588230133057,
+      "train",
+      "train"
+    ],
+    [
+      "TIME",
+      "Days_and_Time/86. Time/MVI_9204.MP4",
+      "Days_and_Time/86. Time/MVI_9202.MP4",
+      0.9996557235717773,
+      "train",
+      "train"
+    ],
+    [
+      "DOG",
+      "Animals/1. Dog/MVI_3030.MOV",
+      "Animals/1. Dog/MVI_3029.MOV",
+      0.9996533393859863,
+      "train",
+      "train"
+    ],
+    [
+      "BLACK",
+      "Colours/54. Black/MVI_3740.MOV",
+      "Colours/54. Black/MVI_3742.MOV",
+      0.999646782875061,
+      "test",
+      "test"
+    ],
+    [
+      "GOOD",
+      "Adjectives/94. good/MVI_5316.MOV",
+      "Adjectives/94. good/MVI_5317.MOV",
+      0.9996459484100342,
+      "train",
+      "train"
+    ],
+    [
+      "ME",
+      "Pronouns/40. I/MVI_9879.MOV",
+      "Pronouns/40. I/MVI_9881.MOV",
+      0.9996455311775208,
+      "train",
+      "train"
+    ],
+    [
+      "HOUSE",
+      "Places/19. House/MVI_3595.MOV",
+      "Places/19. House/MVI_3594.MOV",
+      0.9996442198753357,
+      "test",
+      "test"
+    ],
+    [
+      "LONG",
+      "Adjectives/78. long/MVI_9299.MOV",
+      "Adjectives/78. long/MVI_9300.MOV",
+      0.9996414184570312,
+      "train",
+      "train"
+    ],
+    [
+      "BROTHER",
+      "People/66. Brother/MVI_3780.MOV",
+      "People/66. Brother/MVI_3779.MOV",
+      0.9996412396430969,
+      "train",
+      "train"
+    ],
+    [
+      "BIRD",
+      "Animals/4. Bird/MVI_3012.MOV",
+      "Animals/4. Bird/MVI_3011.MOV",
+      0.9996399283409119,
+      "train",
+      "train"
+    ],
+    [
+      "T-SHIRT",
+      "Clothes/42. T-Shirt/MVI_5171.MOV",
+      "Clothes/42. T-Shirt/MVI_5170.MOV",
+      0.9996373653411865,
+      "train",
+      "train"
+    ],
+    [
+      "LOUD",
+      "Adjectives/1. loud/MVI_5178.MOV",
+      "Adjectives/1. loud/MVI_5179.MOV",
+      0.9996370077133179,
+      "train",
+      "train"
+    ],
+    [
+      "BROTHER",
+      "People/66. Brother/MVI_3780.MOV",
+      "People/66. Brother/MVI_3781.MOV",
+      0.9996341466903687,
+      "train",
+      "train"
+    ],
+    [
+      "FALL",
+      "Seasons/64. Fall/MVI_9133.MP4",
+      "Seasons/64. Fall/MVI_9134.MP4",
+      0.9996315836906433,
+      "val",
+      "val"
+    ],
+    [
+      "GIRL",
+      "People/78. Girl/MVI_5289.MOV",
+      "People/78. Girl/MVI_5288.MOV",
+      0.9996277689933777,
+      "train",
+      "train"
+    ],
+    [
+      "YOU_PLURAL",
+      "Pronouns/46. you (plural)/MVI_0083.MOV",
+      "Pronouns/46. you (plural)/MVI_0084.MOV",
+      0.9996245503425598,
+      "test",
+      "test"
+    ],
+    [
+      "LOUD",
+      "Adjectives/1. loud/MVI_5336.MOV",
+      "Adjectives/1. loud/MVI_5335.MOV",
+      0.9996238350868225,
+      "train",
+      "train"
+    ],
+    [
+      "BOY",
+      "People/77. Boy/MVI_4110.MOV",
+      "People/77. Boy/MVI_4111.MOV",
+      0.9996212124824524,
+      "train",
+      "train"
+    ],
+    [
+      "WHITE",
+      "Colours/55. White/MVI_5209.MOV",
+      "Colours/55. White/MVI_5210.MOV",
+      0.9996208548545837,
+      "train",
+      "train"
+    ],
+    [
+      "PEN",
+      "Home/34. Pen/MVI_8794.MP4",
+      "Home/34. Pen/MVI_8793.MP4",
+      0.9996146559715271,
+      "train",
+      "train"
+    ],
+    [
+      "BROTHER",
+      "People/66. Brother/MVI_3781.MOV",
+      "People/66. Brother/MVI_3778.MOV",
+      0.9996122717857361,
+      "train",
+      "train"
+    ],
+    [
+      "SHORT",
+      "Adjectives/79. short/MVI_9301.MOV",
+      "Adjectives/79. short/MVI_9303.MOV",
+      0.9996055364608765,
+      "val",
+      "val"
+    ],
+    [
+      "BANK",
+      "Places/35. Bank/MVI_3582.MOV",
+      "Places/35. Bank/MVI_3584.MOV",
+      0.9996033906936646,
+      "train",
+      "train"
+    ],
+    [
+      "BIRD",
+      "Animals/4. Bird/MVI_3040.MOV",
+      "Animals/4. Bird/Extra/MVI_3042.MOV",
+      0.9996026754379272,
+      "train",
+      "train"
+    ],
+    [
+      "IT",
+      "Pronouns/44. it/MVI_9939.MOV",
+      "Pronouns/44. it/MVI_9938.MOV",
+      0.9996026754379272,
+      "train",
+      "train"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/MVI_3474.MOV",
+      "Places/28. Store or Shop/MVI_3475.MOV",
+      0.9995986819267273,
+      "train",
+      "train"
+    ],
+    [
+      "HAPPY",
+      "Adjectives/3. happy/MVI_9541.MOV",
+      "Adjectives/3. happy/MVI_9542.MOV",
+      0.9995951056480408,
+      "train",
+      "train"
+    ],
+    [
+      "HOT",
+      "Adjectives/87. hot/MVI_5297.MOV",
+      "Adjectives/87. hot/MVI_5296.MOV",
+      0.9995917677879333,
+      "test",
+      "test"
+    ],
+    [
+      "FALL",
+      "Seasons/64. Fall/MVI_9135.MP4",
+      "Seasons/64. Fall/MVI_9134.MP4",
+      0.9995875954627991,
+      "val",
+      "val"
+    ],
+    [
+      "DEATH",
+      "Society/2. Death/MVI_4802.MOV",
+      "Society/2. Death/MVI_4800.MOV",
+      0.9995805621147156,
+      "test",
+      "test"
+    ],
+    [
+      "TIME",
+      "Days_and_Time/86. Time/MVI_9202.MP4",
+      "Days_and_Time/86. Time/MVI_9203.MP4",
+      0.9995787739753723,
+      "train",
+      "train"
+    ],
+    [
+      "NEW",
+      "Adjectives/91. new/MVI_9340.MOV",
+      "Adjectives/91. new/MVI_9341.MOV",
+      0.999578058719635,
+      "val",
+      "val"
+    ],
+    [
+      "ME",
+      "Pronouns/40. I/MVI_9919.MOV",
+      "Pronouns/40. I/MVI_9920.MOV",
+      0.9995753169059753,
+      "train",
+      "train"
+    ],
+    [
+      "YOU_PLURAL",
+      "Pronouns/46. you (plural)/MVI_9909.MOV",
+      "Pronouns/46. you (plural)/MVI_9905.MOV",
+      0.9995677471160889,
+      "train",
+      "train"
+    ],
+    [
+      "PEN",
+      "Home/34. Pen/MVI_9032.MP4",
+      "Home/34. Pen/MVI_9034.MP4",
+      0.9995667934417725,
+      "val",
+      "val"
+    ],
+    [
+      "NEW",
+      "Adjectives/91. new/MVI_9500.MOV",
+      "Adjectives/91. new/MVI_9501.MOV",
+      0.9995619654655457,
+      "test",
+      "test"
+    ],
+    [
+      "FATHER",
+      "People/61. Father/MVI_4062.MOV",
+      "People/61. Father/MVI_4061.MOV",
+      0.9995587468147278,
+      "val",
+      "val"
+    ],
+    [
+      "BOY",
+      "People/77. Boy/MVI_5285.MOV",
+      "People/77. Boy/MVI_5287.MOV",
+      0.9995561242103577,
+      "train",
+      "train"
+    ],
+    [
+      "QUIET",
+      "Adjectives/2. quiet/MVI_9292.MOV",
+      "Adjectives/2. quiet/MVI_9294.MOV",
+      0.9995535016059875,
+      "train",
+      "train"
+    ],
+    [
+      "YOU_PLURAL",
+      "Pronouns/46. you (plural)/MVI_9908.MOV",
+      "Pronouns/46. you (plural)/MVI_9905.MOV",
+      0.9995526075363159,
+      "train",
+      "train"
+    ],
+    [
+      "WHITE",
+      "Colours/55. White/MVI_4044.MOV",
+      "Colours/55. White/MVI_4042.MOV",
+      0.9995524883270264,
+      "val",
+      "val"
+    ],
+    [
+      "ME",
+      "Pronouns/40. I/MVI_9879.MOV",
+      "Pronouns/40. I/MVI_9880.MOV",
+      0.9995518326759338,
+      "train",
+      "train"
+    ],
+    [
+      "DRY",
+      "Adjectives/97. dry/MVI_9279.MOV",
+      "Adjectives/97. dry/MVI_9277.MOV",
+      0.999546229839325,
+      "val",
+      "val"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/MVI_3474.MOV",
+      "Places/28. Store or Shop/MVI_3473.MOV",
+      0.999541699886322,
+      "train",
+      "train"
+    ],
+    [
+      "TRAIN_TICKET",
+      "Means_of_Transportation/16. train ticket/MVI_3224.MOV",
+      "Means_of_Transportation/16. train ticket/MVI_3225.MOV",
+      0.9995412230491638,
+      "train",
+      "train"
+    ],
+    [
+      "ME",
+      "Pronouns/40. I/MVI_9918.MOV",
+      "Pronouns/40. I/MVI_9919.MOV",
+      0.9995375871658325,
+      "train",
+      "train"
+    ],
+    [
+      "PEN",
+      "Home/34. Pen/MVI_9033.MP4",
+      "Home/34. Pen/MVI_9032.MP4",
+      0.9995359182357788,
+      "val",
+      "val"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/MVI_3632.MOV",
+      "Places/28. Store or Shop/MVI_3634.MOV",
+      0.999535083770752,
+      "train",
+      "train"
+    ],
+    [
+      "BROTHER",
+      "People/66. Brother/MVI_3778.MOV",
+      "People/66. Brother/MVI_3779.MOV",
+      0.9995331168174744,
+      "train",
+      "train"
+    ],
+    [
+      "BIRD",
+      "Animals/4. Bird/MVI_3037.MOV",
+      "Animals/4. Bird/Extra/MVI_3043.MOV",
+      0.9995325803756714,
+      "train",
+      "train"
+    ],
+    [
+      "NEW",
+      "Adjectives/91. new/MVI_5151.MOV",
+      "Adjectives/91. new/MVI_5148.MOV",
+      0.999530017375946,
+      "train",
+      "train"
+    ],
+    [
+      "BIRD",
+      "Animals/4. Bird/MVI_3013.MOV",
+      "Animals/4. Bird/MVI_3011.MOV",
+      0.9995275139808655,
+      "train",
+      "train"
+    ],
+    [
+      "GOOD",
+      "Adjectives/94. good/MVI_9511.MOV",
+      "Adjectives/94. good/MVI_9512.MOV",
+      0.9995259046554565,
+      "train",
+      "train"
+    ],
+    [
+      "HOUSE",
+      "Places/19. House/MVI_3268.MOV",
+      "Places/19. House/MVI_3270.MOV",
+      0.9995234608650208,
+      "train",
+      "train"
+    ],
+    [
+      "CAR",
+      "Means_of_Transportation/11. Car/MVI_3240.MOV",
+      "Means_of_Transportation/11. Car/MVI_3239.MOV",
+      0.9995221495628357,
+      "train",
+      "train"
+    ],
+    [
+      "DOG",
+      "Animals/1. Dog/MVI_3085.MOV",
+      "Animals/1. Dog/MVI_3086.MOV",
+      0.9995195269584656,
+      "train",
+      "train"
+    ],
+    [
+      "LITTLE",
+      "Adjectives/84. small little/MVI_9480.MOV",
+      "Adjectives/84. small little/MVI_9479.MOV",
+      0.9995189309120178,
+      "test",
+      "test"
+    ],
+    [
+      "QUIET",
+      "Adjectives/2. quiet/MVI_9451.MOV",
+      "Adjectives/2. quiet/MVI_9453.MOV",
+      0.999517560005188,
+      "train",
+      "train"
+    ],
+    [
+      "DRY",
+      "Adjectives/97. dry/MVI_9278.MOV",
+      "Adjectives/97. dry/MVI_9277.MOV",
+      0.999516487121582,
+      "val",
+      "val"
+    ],
+    [
+      "GOOD",
+      "Adjectives/94. good/MVI_9351.MOV",
+      "Adjectives/94. good/MVI_9349.MOV",
+      0.9995140433311462,
+      "test",
+      "test"
+    ],
+    [
+      "FATHER",
+      "People/61. Father/MVI_3910.MOV",
+      "People/61. Father/MVI_3909.MOV",
+      0.9995098114013672,
+      "train",
+      "train"
+    ],
+    [
+      "SHORT",
+      "Adjectives/79. short/extra/MVI_5192.MOV",
+      "Adjectives/79. short/MVI_5191.MOV",
+      0.9995067715644836,
+      "train",
+      "train"
+    ],
+    [
+      "T-SHIRT",
+      "Clothes/42. T-Shirt/MVI_3850.MOV",
+      "Clothes/42. T-Shirt/MVI_3852.MOV",
+      0.9995027184486389,
+      "train",
+      "train"
+    ],
+    [
+      "NEW",
+      "Adjectives/91. new/MVI_9341.MOV",
+      "Adjectives/91. new/MVI_9342.MOV",
+      0.9995017051696777,
+      "val",
+      "val"
+    ],
+    [
+      "CELL_PHONE",
+      "Electronics/54. Cell phone/MVI_9100.MP4",
+      "Electronics/54. Cell phone/MVI_9101.MP4",
+      0.9995008707046509,
+      "val",
+      "val"
+    ],
+    [
+      "HELLO",
+      "Greetings/48. Hello/MVI_9917.MOV",
+      "Greetings/48. Hello/MVI_9915.MOV",
+      0.9994945526123047,
+      "train",
+      "train"
+    ],
+    [
+      "BLACK",
+      "Colours/54. Black/MVI_3888.MOV",
+      "Colours/54. Black/MVI_3887.MOV",
+      0.9994933605194092,
+      "train",
+      "train"
+    ],
+    [
+      "SHOP",
+      "Places/28. Store or Shop/MVI_3635.MOV",
+      "Places/28. Store or Shop/MVI_3633.MOV",
+      0.9994927048683167,
+      "train",
+      "train"
+    ],
+    [
+      "COURT",
+      "Places/23. Court/MVI_3287.MOV",
+      "Places/23. Court/MVI_3286.MOV",
+      0.9994909763336182,
+      "train",
+      "train"
+    ],
+    [
+      "LITTLE",
+      "Adjectives/84. small little/MVI_9479.MOV",
+      "Adjectives/84. small little/MVI_9478.MOV",
+      0.9994900226593018,
+      "test",
+      "test"
+    ],
+    [
+      "FAN",
+      "Electronics/53. Fan/MVI_4966.MOV",
+      "Electronics/53. Fan/MVI_4965.MOV",
+      0.9994876980781555,
+      "val",
+      "val"
+    ]
+  ],
+  "near_duplicate_pair_count": 360,
+  "near_duplicate_cross_train_test": 1,
+  "pairs_checked": 8935,
+  "frame_stats": {
+    "median": 60.0,
+    "min": 36,
+    "max": 154
+  },
+  "archive": {
+    "archive": "not found",
+    "total_files": null,
+    "corrupt_files": 0,
+    "corrupt_examples": []
+  },
+  "geometry_calibration": {
+    "shoulder_torso_ratio": 0.20225521754749376,
+    "face_vertical_over_interocular": 1.5823257754984326,
+    "videos_used": 200,
+    "frames_used": 12702,
+    "x_axis_scale_from_body": 3.2463933833786838,
+    "x_axis_scale_from_face": 3.020858677927515,
+    "x_axis_scale_theoretical": 3.1605,
+    "adopted_x_axis_scale": 3.1605,
+    "reference": {
+      "shoulder_torso_ratio": 0.6566,
+      "face_vertical_over_interocular": 0.5238
+    }
+  }
+}

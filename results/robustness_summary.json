@@ -1,0 +1,83 @@
+{
+  "protocol": "session_disjoint",
+  "split": "test",
+  "seed": 42,
+  "n_clips": 154,
+  "conditions": [
+    {
+      "condition": "clean",
+      "description": "no perturbation"
+    },
+    {
+      "condition": "landmark_dropout_p10",
+      "description": "10% of landmarks dropped per frame"
+    },
+    {
+      "condition": "landmark_dropout_p30",
+      "description": "30% of landmarks dropped per frame"
+    },
+    {
+      "condition": "hand_left_missing",
+      "description": "left-hand landmarks removed"
+    },
+    {
+      "condition": "hand_right_missing",
+      "description": "right-hand landmarks removed"
+    },
+    {
+      "condition": "both_hands_missing",
+      "description": "both hands removed (pose only)"
+    },
+    {
+      "condition": "gaussian_sigma_10",
+      "description": "Gaussian jitter sigma=0.10 shoulder-widths"
+    },
+    {
+      "condition": "gaussian_sigma_25",
+      "description": "Gaussian jitter sigma=0.25 shoulder-widths"
+    },
+    {
+      "condition": "gaussian_sigma_50",
+      "description": "Gaussian jitter sigma=0.50 shoulder-widths"
+    },
+    {
+      "condition": "frame_drop_p20",
+      "description": "20% of frames dropped, resampled"
+    },
+    {
+      "condition": "frame_drop_p40",
+      "description": "40% of frames dropped, resampled"
+    },
+    {
+      "condition": "frame_drop_p60",
+      "description": "60% of frames dropped, resampled"
+    },
+    {
+      "condition": "frame_skip_keep50",
+      "description": "uniform subsampling, every 2nd frame"
+    },
+    {
+      "condition": "mask_missing",
+      "description": "presence mask zeroed (MASK_ENABLED builds)"
+    }
+  ],
+  "best_model_per_condition": {
+    "clean": "gru_mha",
+    "landmark_dropout_p10": "gru_mha",
+    "landmark_dropout_p30": "gru_mha",
+    "hand_left_missing": "gru_mha",
+    "hand_right_missing": "gru_mha",
+    "both_hands_missing": "gru_mha",
+    "gaussian_sigma_10": "gru_mha",
+    "gaussian_sigma_25": "gru_mha",
+    "gaussian_sigma_50": "gru_mha",
+    "frame_drop_p20": "gru_mha",
+    "frame_drop_p40": "gru_mha",
+    "frame_drop_p60": "gru_mha",
+    "frame_skip_keep50": "gru_mha",
+    "mask_missing": "gru_mha"
+  },
+  "seconds": 10.7,
+  "csv": "C:\\Users\\Nazifa Nadkar\\Downloads\\ISL-Classroom-Recognition-FINAL-READY\\project\\results\\robustness_results.csv",
+  "plot": "C:\\Users\\Nazifa Nadkar\\Downloads\\ISL-Classroom-Recognition-FINAL-READY\\project\\results\\robustness_degradation.png"
+}

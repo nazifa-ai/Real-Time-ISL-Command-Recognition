@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f8fc">
+  <title>ISL Command Recognition</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">🤟</div><div><h1>ISL Command<br>Recognition</h1><p>Classroom assistant</p></div></div>
+    <div class="nav-caption">WORKSPACE</div>
+    <nav id="sideNav">
+      <button class="nav-item active" data-view="home"><span>⌂</span> Overview</button>
+      <button class="nav-item" data-view="upload"><span>◉</span> Live recognition</button>
+      <button class="nav-item" data-view="perSign"><span>▤</span> Per-sign analysis</button>
+      <button class="nav-item" data-view="perf"><span>⇄</span> Model comparison</button>
+      <button class="nav-item" data-view="vocab"><span>⌘</span> Supported signs</button>
+      <button class="nav-item" data-view="history"><span>◷</span> Recognition history</button>
+      <button class="nav-item" data-view="review"><span>⚑</span> Error review</button>
+      <button class="nav-item" data-view="analytics"><span>▥</span> Analytics</button>
+      <button class="nav-item" data-view="responsible"><span>◇</span> Responsible AI</button>
+      <button class="nav-item" data-view="settings"><span>⚙</span> Settings</button>
+    </nav>
+    <div class="sidebar-foot"><span class="pulse"></span> Local prototype<br><small>INCLUDE-50 · Isolated signs</small></div>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <div><div class="eyebrow">REAL-TIME INDIAN SIGN LANGUAGE</div><h2 id="viewTitle">Recognition overview</h2></div>
+      <div class="topbar-right"><span class="status-pill" id="healthPill">● Checking system</span><label class="top-model">Model <select id="modelSelect" aria-label="Choose recognition model"></select></label><span id="modelBadge" hidden></span></div>
+    </header>
+    <div class="banner" id="errorBanner" hidden></div>
+
+    <section id="view-home" class="view active">
+      <div class="welcome"><div><h1>Recognition workspace</h1><p>Camera → landmarks → temporal model → reviewed classroom output</p></div><button id="startBtn" class="primary start-main">▶ &nbsp;Start live session</button><button id="resetBtn" type="button">Reset sequence</button><button id="stopBtn" class="stop-main" disabled>Stop session</button></div>
+      <div class="kpi-grid">
+        <article class="kpi"><span class="kpi-label">CAMERA INPUT</span><div><strong id="cameraFps">—</strong><small>FPS</small></div><span class="kpi-foot"><b id="frames">0</b> camera frames received</span></article>
+        <article class="kpi"><span class="kpi-label">TEMPORAL WINDOW</span><div><strong id="sequenceFrames">0/30</strong></div><span class="kpi-foot">Frames collected for this decision</span></article>
+        <article class="kpi"><span class="kpi-label">FRAME ROUND-TRIP LATENCY</span><div><strong id="latency">—</strong></div><span class="kpi-foot">Browser capture/encoding through API response</span></article>
+        <article class="kpi"><span class="kpi-label">MODEL THROUGHPUT</span><div><strong id="modelThroughput">—</strong><small>seq/s</small></div><span class="kpi-foot">Test-set benchmark; live rate while camera runs</span></article>
+      </div>
+
+      <div class="hero-grid">
+        <article class="panel camera-panel">
+          <div class="panel-head"><div><span class="section-kicker">LIVE INPUT</span><h3>Camera &amp; landmarks</h3></div><span id="cameraState" class="live-tag">Camera idle</span></div>
+          <div class="video-wrap"><video id="preview" autoplay muted playsinline></video><canvas id="skeletonCanvas"></canvas><div id="videoOverlay" class="overlay">Start a session to connect your camera</div><div class="rec-dot" id="recDot">● LIVE</div><div class="track-badge" id="trackBadge">Landmarks waiting</div></div>
+            <div class="camera-meta"><span>Detection <b id="detectionState">Waiting</b></span><span>Processed <b id="processedFps">— FPS</b></span><span>Model <b id="cameraModel">GRU + MHA</b></span><label class="switch-label" title="Speaks recognized signs, or one closest-match hint during an uncertain attempt"><input type="checkbox" id="speechToggle" checked> Speak results + closest-match hint</label></div>
+          <div class="pipeline"><span class="pipeline-step done">Camera</span><i>›</i><span class="pipeline-step" id="landmarkStep">Hands + pose</span><i>›</i><span class="pipeline-step" id="sequenceStep">30-frame sequence</span><i>›</i><span class="pipeline-step" id="decisionStep">Confidence gate</span><i>›</i><span class="pipeline-step">Text + speech</span></div>
+          <div class="stage-grid" aria-label="Live processing stage timings">
+            <div><span>Frame decode</span><b id="decodeMs">—</b></div><div><span>MediaPipe</span><b id="mediaPipeMs">—</b></div>
+            <div><span>Feature prep</span><b id="preprocessingMs">—</b></div><div><span>Buffer update</span><b id="bufferMs">—</b></div>
+            <div><span>Model</span><b id="stageModelMs">—</b></div><div><span>Confidence + gate</span><b id="handGateMs">—</b></div>
+            <div><span>Smoothing</span><b id="smoothingMs">—</b></div><div><span>UI update</span><b id="renderMs">—</b></div>
+          </div>
+          <p class="microcopy">Only sampled frames and numeric landmarks are sent to the local API. Camera video is not retained.</p>
+        </article>
+
+        <article class="panel prediction-panel">
+          <div class="panel-head"><div><span class="section-kicker">CURRENT DECISION</span><h3>Recognized sign</h3></div><span id="resultStatus" class="decision-status">Waiting</span></div>
+          <div class="decision"><div class="decision-symbol">✋</div><div><div id="sign" class="sign">READY</div><div id="caption" class="caption">Start the camera and perform one sign.</div></div></div>
+          <div class="confidence-block"><div><span>Confidence</span><b id="confidence">—</b></div><div class="confidence-track"><i id="confidenceBar"></i></div><small>Uncertain predictions stay visible for human review.</small></div>
+          <div class="bars" id="topK"></div>
+          <div class="prediction-facts"><div><span>Model inference</span><b id="modelLatency">—</b></div><div><span>Server processing</span><b id="serverLatency">—</b></div><div><span>Confidence gate</span><b id="threshold">—</b></div></div>
+          <button id="speakResultBtn" class="speak-btn" type="button" disabled>◖ &nbsp;Speak this result</button>
+          <div class="feedback"><span>Human review</span><div id="feedback" class="feedback-buttons"><button data-action="accept" class="good">✓ Accept</button><button data-action="correct">↺ Correct</button><button data-action="reject" class="bad">× Reject</button></div><div id="feedbackStatus" class="feedback-status"></div></div>
+        </article>
+      </div>
+
+      <div class="lower-grid">
+        <article class="panel"><div class="panel-head"><div><span class="section-kicker">MODEL BENCHMARK</span><h3>Which model should I use?</h3></div><button class="text-button" data-open="perf">Full comparison →</button></div><div id="homeModelTable" class="model-cards"></div></article>
+        <article class="panel"><div class="panel-head"><div><span class="section-kicker">RECENT ACTIVITY</span><h3>Latest predictions</h3></div><button class="text-button" data-open="history">View history →</button></div><div id="recentList" class="recent-list"><p class="empty-state">Your reviewed and confident predictions will appear here.</p></div></article>
+      </div>
+      <article class="panel home-signs"><div class="panel-head"><div><span class="section-kicker">HELD-OUT EVALUATION</span><h3>Per-sign performance at a glance</h3></div><button class="text-button" data-open="perSign">Compare every sign →</button></div><div id="homePerSign" class="home-per-sign"></div></article>
+    </section>
+
+    <section id="view-upload" class="view">
+      <div class="page-heading"><span class="section-kicker">LIVE RECOGNITION</span><h1>Camera session</h1><p>Run a continuous live session or compare the same gesture against a recorded clip.</p></div>
+      <div class="panel upload-panel"><label class="file-btn">Choose a video clip<input id="fileInput" type="file" accept="video/*"></label><div id="uploadResult" class="upload-result"></div><div class="callout">The model expects one isolated sign in a 30-frame temporal window. It is not a sentence-level ISL translator.</div></div>
+    </section>
+
+    <section id="view-perSign" class="view">
+      <div class="page-heading"><span class="section-kicker">CLASS-LEVEL EVIDENCE</span><h1>Per-sign model analysis</h1><p>Each sign is compared on the same held-out test clips for all trained models.</p></div>
+      <article class="panel"><div class="table-toolbar"><div><h3>50-sign comparison</h3><p id="perSignMethod" class="microcopy">Precision, recall, within-sign accuracy*, F1, support and measured single-sequence latency.</p></div><input id="signFilter" type="search" placeholder="Filter signs, e.g. HELLO"></div><div class="table-wrap"><table class="wide-table"><thead id="perSignHead"></thead><tbody id="perSignBody"></tbody></table></div><p class="table-footnote">* Within-sign accuracy is the fraction of held-out clips of that sign recognised correctly; mathematically this equals recall. Latency is model-only, measured on clips whose true label is that sign. The test set has only 3–4 clips per sign, so estimates are directional. Rows are NOT live-webcam scores.</p></article>
+      <div class="two-grid"><article class="panel"><h3>Signer-independent accuracy</h3><div class="metric-placeholder">NOT EVALUATED</div><p class="microcopy">The INCLUDE-50 release has no signer IDs. Session-disjoint clips are a useful proxy, but cannot establish unseen-signer accuracy.</p></article><article class="panel"><h3>Lighting robustness by sign</h3><div class="metric-placeholder">NOT EVALUATED</div><p class="microcopy">Current lighting stress tests perturb landmarks, not source-image illumination. Run the documented low/normal/bright webcam protocol before claiming per-sign lighting results.</p></article></div>
+    </section>
+
+    <section id="view-perf" class="view">
+      <div class="page-heading"><span class="section-kicker">IDENTICAL TEST SPLIT</span><h1>Model comparison</h1><p>LSTM vs GRU vs GRU + multi-head attention. Speed and quality are reported separately.</p></div>
+      <div class="model-cards model-cards-large" id="modelStats"></div>
+      <article class="panel"><div class="panel-head"><div><h3>Aggregate test metrics</h3><p class="microcopy">Model-only latency is warmed single-sequence inference; pipeline latency also includes MediaPipe.</p></div></div><div id="evalTable" class="table-wrap"></div></article>
+      <article class="panel"><div class="panel-head"><div><h3>Robustness experiments</h3><p class="microcopy">Measured landmark drop, missing-hand, coordinate noise and frame-drop conditions.</p></div></div><div id="robustnessTable" class="table-wrap"></div></article>
+    </section>
+
+    <section id="view-history" class="view"><div class="page-heading"><span class="section-kicker">AUDIT TRAIL</span><h1>Recognition history</h1><p>Predictions, confidence, model, timing and human decisions.</p></div><article class="panel"><div class="panel-head"><h3>Session events</h3><div class="controls"><button id="refreshBtn">Refresh</button><button id="exportBtn" class="primary">Export CSV</button><button id="exportJsonBtn">Export JSON</button></div></div><div class="table-wrap"><table><thead><tr><th>Time</th><th>Sign</th><th>Confidence</th><th>Model</th><th>Latency</th><th>Stable</th><th>Status</th><th>Human review</th><th>Corrected to</th><th>Session</th></tr></thead><tbody id="events"></tbody></table></div></article></section>
+
+    <section id="view-vocab" class="view"><div class="page-heading"><span class="section-kicker">MODEL METADATA</span><h1 id="classesSummary">Supported signs</h1><p>The model only recognises the vocabulary returned by the backend.</p></div><article class="panel"><input id="vocabularySearch" type="search" placeholder="Search supported signs"><div id="classes" class="chips"></div></article></section>
+
+    <section id="view-review" class="view"><div class="page-heading"><span class="section-kicker">HUMAN OVERRIDE</span><h1>Error review</h1><p>Inspect uncertain, rejected and corrected outputs. Corrections are kept for analysis.</p></div><article class="panel"><div class="panel-head"><h3>Flagged predictions</h3><input id="reviewFilter" type="search" placeholder="Filter sign, model or note"><button id="refreshReviewBtn">Refresh</button></div><div class="table-wrap"><table><thead><tr><th>Time</th><th>Predicted</th><th>Confidence</th><th>Status</th><th>Action</th><th>Correct label</th><th>Source</th><th>Note</th></tr></thead><tbody id="reviewEvents"></tbody></table></div></article><article class="panel"><h3>Logged pipeline failures</h3><div class="table-wrap"><table><thead><tr><th>Time</th><th>Stage</th><th>Model</th><th>Source</th><th>Message</th></tr></thead><tbody id="systemFailures"></tbody></table></div></article></section>
+
+    <section id="view-analytics" class="view"><div class="page-heading"><span class="section-kicker">OBSERVABILITY</span><h1>Session analytics</h1><p>Measured from the audit log and current inference session.</p></div><article class="panel"><h3>Recognition and human feedback</h3><div class="stats" id="liveMetrics"></div></article></section>
+
+    <section id="view-responsible" class="view"><div class="page-heading"><span class="section-kicker">LIMITATIONS &amp; OVERSIGHT</span><h1>Responsible AI</h1><p>Designed for a supervised classroom prototype; not a replacement for a fluent ISL interpreter.</p></div><div class="two-grid"><article class="panel"><h3>Privacy &amp; security</h3><ul class="doc-list"><li>Camera permission is requested by the browser. Frames are processed in memory by the local API and are not saved.</li><li>Only predictions and human feedback are written to local JSONL audit files; no raw video is retained.</li><li>Use localhost for a local demo. Public deployment requires authentication, restricted origins and HTTPS.</li></ul></article><article class="panel"><h3>Known evaluation gaps</h3><ul class="doc-list"><li>Vocabulary is the 50 isolated signs in AI4Bharat INCLUDE-50; grammar and continuous signing are outside scope.</li><li>Signer-independent accuracy: not evaluated; the dataset has no signer IDs.</li><li>Per-sign lighting robustness: not evaluated; the available robustness suite perturbs extracted landmarks, not image brightness.</li><li>Accessibility feedback: not yet established through a participant study. Human correction buttons provide operational feedback only.</li></ul></article></div></section>
+    <section id="view-settings" class="view"><div class="page-heading"><span class="section-kicker">SESSION CONTROLS</span><h1>Recognition settings</h1><p>These values affect live inference and are saved in this browser.</p></div><div class="two-grid"><article class="panel"><h3>Recognition</h3><label class="setting-row" for="thresholdInput"><span>Confidence threshold <b id="thresholdValue">0.70</b></span><input id="thresholdInput" type="range" min="0.50" max="0.95" step="0.01" value="0.70"></label><label class="setting-row" for="smoothingInput"><span>Temporal smoothing window</span><select id="smoothingInput"><option value="1">1 frame · fastest</option><option value="3">3 frames · balanced</option><option value="5">5 frames · steadier</option><option value="7">7 frames · most stable</option></select></label><label class="setting-row" for="cameraSelect"><span>Camera device</span><select id="cameraSelect"><option value="">System default</option></select></label><button id="saveSettingsBtn" class="primary" type="button">Save and apply</button><p id="settingsStatus" class="microcopy" role="status"></p></article><article class="panel"><h3>Speech output</h3><label class="setting-row" for="ttsVoiceSelect"><span>Browser voice</span><select id="ttsVoiceSelect"><option value="">System default voice</option></select></label><p id="speechStatus" class="microcopy" role="status">Checking browser speech support…</p><p class="microcopy">Speech is generated by this browser. It requires an available system voice and is not sent to the API.</p></article></div></section>
+  </main>
+</div>
+<script src="/static/skeleton.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

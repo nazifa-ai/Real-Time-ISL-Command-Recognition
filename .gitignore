@@ -1,0 +1,71 @@
+# ---- datasets: exclude raw recordings; include the shipped processed tensor ----
+datasets/raw/
+datasets/processed/*
+!datasets/raw/README.md
+!datasets/processed/README.md
+!datasets/processed/sequences_session_disjoint.npz
+*.zip
+**/Pose_Signs/
+**/keypoints/
+/corrupt_scan.json
+
+# keep the small official metadata (a few hundred KB) versioned
+!datasets/metadata/*.csv
+!datasets/metadata/*.json
+
+# ---- inference assets required to run the checked-in demo ----------------
+models/*/*.keras
+!models/lstm/model.keras
+!models/gru/model.keras
+!models/gru_mha/model.keras
+models/*/*.h5
+models/*/saved_model/
+models/mediapipe_assets/*.task
+!models/mediapipe_assets/*.task
+
+# ---- generated outputs ---------------------------------------------------
+# The evaluation CSVs/PNGs, the audit summary and the audit report ARE deliverables
+# of this project, so they stay versioned.  Only throwaway scratch output is ignored.
+results/scratch/
+*.tmp
+
+# ---- logs / personal data ------------------------------------------------
+logs/
+*.jsonl
+feedback/
+profiles/
+personalization/
+
+# ---- secrets -------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+
+# ---- python --------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+.venv-1/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# ---- media (user recordings must never be committed) ---------------------
+*.mp4
+*.MOV
+*.mov
+*.avi
+*.mkv
+*.wav
+*.mp3
+
+# ---- editors / OS --------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+

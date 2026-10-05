@@ -1,0 +1,43 @@
+protocol,split,model,condition,description,parameters,accuracy,macro_precision,macro_recall,macro_f1,weighted_f1,mean_confidence,n_below_threshold,accuracy_delta,macro_f1_delta,relative_accuracy_drop_pct
+session_disjoint,test,lstm,clean,no perturbation,245426,0.662338,0.601857,0.656667,0.596857,0.602505,0.783534,42.0,0.0,0.0,0.0
+session_disjoint,test,lstm,landmark_dropout_p10,10% of landmarks dropped per frame,245426,0.675325,0.616381,0.668333,0.612571,0.619316,0.772605,51.0,0.012987,0.015714,-1.961
+session_disjoint,test,lstm,landmark_dropout_p30,30% of landmarks dropped per frame,245426,0.584416,0.518238,0.576667,0.516239,0.521798,0.748755,55.0,-0.077922,-0.080618,11.765
+session_disjoint,test,lstm,hand_left_missing,left-hand landmarks removed,245426,0.227273,0.132238,0.22,0.142533,0.145521,0.485268,120.0,-0.435065,-0.454324,65.686
+session_disjoint,test,lstm,hand_right_missing,right-hand landmarks removed,245426,0.175325,0.08721,0.18,0.101231,0.098601,0.546996,105.0,-0.487013,-0.495626,73.529
+session_disjoint,test,lstm,both_hands_missing,both hands removed (pose only),245426,0.038961,0.006444,0.04,0.010821,0.01054,0.357946,146.0,-0.623377,-0.586036,94.118
+session_disjoint,test,lstm,gaussian_sigma_10,Gaussian jitter sigma=0.10 shoulder-widths,245426,0.688312,0.622048,0.683333,0.625048,0.629963,0.779172,46.0,0.025974,0.02819,-3.922
+session_disjoint,test,lstm,gaussian_sigma_25,Gaussian jitter sigma=0.25 shoulder-widths,245426,0.681818,0.662,0.676667,0.633603,0.638611,0.759166,47.0,0.019481,0.036746,-2.941
+session_disjoint,test,lstm,gaussian_sigma_50,Gaussian jitter sigma=0.50 shoulder-widths,245426,0.584416,0.549548,0.578333,0.534544,0.540068,0.732317,61.0,-0.077922,-0.062313,11.765
+session_disjoint,test,lstm,frame_drop_p20,"20% of frames dropped, resampled",245426,0.649351,0.590071,0.643333,0.589716,0.595404,0.765825,54.0,-0.012987,-0.007141,1.961
+session_disjoint,test,lstm,frame_drop_p40,"40% of frames dropped, resampled",245426,0.642857,0.614571,0.641667,0.598532,0.60023,0.75993,55.0,-0.019481,0.001675,2.941
+session_disjoint,test,lstm,frame_drop_p60,"60% of frames dropped, resampled",245426,0.558442,0.563788,0.55,0.515101,0.52376,0.718674,66.0,-0.103896,-0.081756,15.686
+session_disjoint,test,lstm,frame_skip_keep50,"uniform subsampling, every 2nd frame",245426,0.668831,0.617833,0.665,0.603187,0.607743,0.784216,43.0,0.006494,0.00633,-0.98
+session_disjoint,test,lstm,mask_missing,presence mask zeroed (MASK_ENABLED builds),245426,0.662338,0.601857,0.656667,0.596857,0.602505,0.783534,42.0,0.0,0.0,0.0
+session_disjoint,test,gru,clean,no perturbation,188338,0.62987,0.562143,0.626667,0.558786,0.564268,0.714989,63.0,0.0,0.0,0.0
+session_disjoint,test,gru,landmark_dropout_p10,10% of landmarks dropped per frame,188338,0.642857,0.584976,0.636667,0.580957,0.588687,0.716144,61.0,0.012987,0.02217,-2.062
+session_disjoint,test,gru,landmark_dropout_p30,30% of landmarks dropped per frame,188338,0.558442,0.530952,0.548333,0.511929,0.520818,0.652526,86.0,-0.071429,-0.046857,11.34
+session_disjoint,test,gru,hand_left_missing,left-hand landmarks removed,188338,0.220779,0.144024,0.22,0.149015,0.148031,0.53043,111.0,-0.409091,-0.409771,64.948
+session_disjoint,test,gru,hand_right_missing,right-hand landmarks removed,188338,0.136364,0.074484,0.14,0.080163,0.078081,0.573709,99.0,-0.493506,-0.478623,78.351
+session_disjoint,test,gru,both_hands_missing,both hands removed (pose only),188338,0.064935,0.00936,0.066667,0.015217,0.014822,0.565942,109.0,-0.564935,-0.543569,89.691
+session_disjoint,test,gru,gaussian_sigma_10,Gaussian jitter sigma=0.10 shoulder-widths,188338,0.62987,0.564786,0.626667,0.558496,0.564419,0.710037,69.0,0.0,-0.00029,0.0
+session_disjoint,test,gru,gaussian_sigma_25,Gaussian jitter sigma=0.25 shoulder-widths,188338,0.584416,0.548333,0.583333,0.527898,0.533357,0.676955,77.0,-0.045455,-0.030889,7.216
+session_disjoint,test,gru,gaussian_sigma_50,Gaussian jitter sigma=0.50 shoulder-widths,188338,0.512987,0.48331,0.515,0.463801,0.465669,0.65313,85.0,-0.116883,-0.094986,18.557
+session_disjoint,test,gru,frame_drop_p20,"20% of frames dropped, resampled",188338,0.623377,0.548238,0.62,0.556485,0.562459,0.72795,60.0,-0.006494,-0.002302,1.031
+session_disjoint,test,gru,frame_drop_p40,"40% of frames dropped, resampled",188338,0.584416,0.536524,0.58,0.530603,0.53624,0.696604,70.0,-0.045455,-0.028183,7.216
+session_disjoint,test,gru,frame_drop_p60,"60% of frames dropped, resampled",188338,0.525974,0.506976,0.526667,0.477258,0.47924,0.690249,67.0,-0.103896,-0.081528,16.495
+session_disjoint,test,gru,frame_skip_keep50,"uniform subsampling, every 2nd frame",188338,0.636364,0.588048,0.63,0.570333,0.578221,0.719503,69.0,0.006494,0.011547,-1.031
+session_disjoint,test,gru,mask_missing,presence mask zeroed (MASK_ENABLED builds),188338,0.62987,0.562143,0.626667,0.558786,0.564268,0.714989,63.0,0.0,0.0,0.0
+session_disjoint,test,gru_mha,clean,no perturbation,263026,0.772727,0.721405,0.766667,0.718195,0.725514,0.729386,55.0,0.0,0.0,0.0
+session_disjoint,test,gru_mha,landmark_dropout_p10,10% of landmarks dropped per frame,263026,0.753247,0.690905,0.746667,0.695437,0.703348,0.706188,64.0,-0.019481,-0.022758,2.521
+session_disjoint,test,gru_mha,landmark_dropout_p30,30% of landmarks dropped per frame,263026,0.720779,0.680381,0.713333,0.666492,0.673712,0.633998,79.0,-0.051948,-0.051703,6.723
+session_disjoint,test,gru_mha,hand_left_missing,left-hand landmarks removed,263026,0.532468,0.43682,0.52,0.438283,0.448544,0.41326,128.0,-0.24026,-0.279912,31.092
+session_disjoint,test,gru_mha,hand_right_missing,right-hand landmarks removed,263026,0.25974,0.154742,0.263333,0.17028,0.170186,0.542024,104.0,-0.512987,-0.547915,66.387
+session_disjoint,test,gru_mha,both_hands_missing,both hands removed (pose only),263026,0.116883,0.07081,0.118333,0.068799,0.069177,0.335298,147.0,-0.655844,-0.649396,84.874
+session_disjoint,test,gru_mha,gaussian_sigma_10,Gaussian jitter sigma=0.10 shoulder-widths,263026,0.766234,0.697833,0.76,0.7151,0.7225,0.717453,59.0,-0.006494,-0.003095,0.84
+session_disjoint,test,gru_mha,gaussian_sigma_25,Gaussian jitter sigma=0.25 shoulder-widths,263026,0.733766,0.703571,0.726667,0.681628,0.689897,0.686047,62.0,-0.038961,-0.036567,5.042
+session_disjoint,test,gru_mha,gaussian_sigma_50,Gaussian jitter sigma=0.50 shoulder-widths,263026,0.681818,0.670762,0.678333,0.637977,0.643484,0.539869,107.0,-0.090909,-0.080218,11.765
+session_disjoint,test,gru_mha,frame_drop_p20,"20% of frames dropped, resampled",263026,0.733766,0.682238,0.726667,0.673349,0.681112,0.722026,57.0,-0.038961,-0.044846,5.042
+session_disjoint,test,gru_mha,frame_drop_p40,"40% of frames dropped, resampled",263026,0.746753,0.688524,0.741667,0.689524,0.69666,0.707963,60.0,-0.025974,-0.028671,3.361
+session_disjoint,test,gru_mha,frame_drop_p60,"60% of frames dropped, resampled",263026,0.688312,0.661786,0.68,0.637351,0.64677,0.658366,80.0,-0.084416,-0.080844,10.924
+session_disjoint,test,gru_mha,frame_skip_keep50,"uniform subsampling, every 2nd frame",263026,0.753247,0.732238,0.746667,0.71081,0.717599,0.725912,54.0,-0.019481,-0.007385,2.521
+session_disjoint,test,gru_mha,mask_missing,presence mask zeroed (MASK_ENABLED builds),263026,0.772727,0.721405,0.766667,0.718195,0.725514,0.729386,55.0,0.0,0.0,0.0
