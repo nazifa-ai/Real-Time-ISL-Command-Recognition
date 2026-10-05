@@ -33,14 +33,14 @@ COPY . .
 # Fetch bundles only if a task asset is missing.
 RUN python scripts/download_models.py --check || python scripts/download_models.py
 
-# Never run as root.
-RUN useradd --create-home --uid 10001 isl && chown -R isl:isl /app
+# Container user UID 1000 for Hugging Face Spaces / general container runtimes.
+RUN useradd --create-home --uid 1000 isl && chown -R isl:isl /app
 USER isl
 
-EXPOSE 8000
+EXPOSE 7860
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD curl -fsS http://127.0.0.1:8000/health || exit 1
+    CMD curl -fsS http://127.0.0.1:${PORT:-7860}/health || exit 1
 
-# The FastAPI service also serves the browser dashboard.
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# The FastAPI service serves the browser dashboard on $PORT (defaults to 7860 for Hugging Face Spaces).
+CMD ["sh", "-c", "uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-7860}"]
