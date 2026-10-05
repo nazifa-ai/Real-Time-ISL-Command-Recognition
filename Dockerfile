@@ -18,7 +18,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 # OpenCV headless needs these shared libraries; ffmpeg decodes uploaded videos.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        ffmpeg libglib2.0-0 libsm6 libxext6 libxrender1 \
+        ffmpeg libegl1 libgl1 libglib2.0-0 libsm6 libxext6 libxrender1 \
         curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
