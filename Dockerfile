@@ -16,9 +16,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     OPENCV_VIDEOIO_PRIORITY_LIST=FFMPEG \
     ISL_PERSIST_UPLOADS=false
 
-# OpenCV headless needs these shared libraries; ffmpeg decodes uploaded videos.
+# OpenCV headless and MediaPipe Tasks need these shared libraries; ffmpeg decodes uploaded videos.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        ffmpeg libegl1 libgl1 libglib2.0-0 libsm6 libxext6 libxrender1 \
+        ffmpeg libegl1 libgles2 libgl1 libglib2.0-0 libsm6 libxext6 libxrender1 \
         curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
