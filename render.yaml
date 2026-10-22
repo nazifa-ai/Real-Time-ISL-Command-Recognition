@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: isl-command-recognition
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: main
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: TF_CPP_MIN_LOG_LEVEL
+        value: "2"
+      - key: TF_ENABLE_ONEDNN_OPTS
+        value: "0"
+      - key: CONFIDENCE_THRESHOLD
+        value: "0.38"
+      - key: SMART_MIN_PROB
+        value: "0.28"
+      - key: SMART_MIN_MARGIN
+        value: "0.08"
