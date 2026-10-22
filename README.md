@@ -10,6 +10,14 @@ pinned: false
 
 # Real-Time Indian Sign Language Command Recognition with Temporal Deep Learning
 
+[![Live Demo on Render](https://img.shields.io/badge/Live%20Demo-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://isl-command-recognition.onrender.com)
+[![Hugging Face Space](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space-yellow?style=for-the-badge)](https://huggingface.co/spaces/NAAZ1605/Real-time-isl-command-recognition)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/nazifa-ai/Real-Time-ISL-Command-Recognition)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Docker Container](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+
+> 🚀 **Live Web Application:** [https://isl-command-recognition.onrender.com](https://isl-command-recognition.onrender.com)
+
 A final-year AI capstone: recognising a **fixed vocabulary of isolated ISL commands**
 from a webcam or a video file, with three temporal deep-learning models trained and
 compared under identical conditions.

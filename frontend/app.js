@@ -80,7 +80,16 @@ async function api(path, opts = {}) {
   catch (e) { throw new Error(`Network error calling ${path}: ${e.message}`); }
   if (!r.ok) {
     let detail = r.statusText;
-    try { detail = (await r.text()) || detail; } catch (_) {}
+    try {
+      const text = await r.text();
+      if (text.includes('<!DOCTYPE') || text.includes('<html')) {
+        detail = r.status === 502
+          ? 'Server is waking up/initializing on cloud. Please wait a few moments and try again.'
+          : `Server returned error (${r.status})`;
+      } else {
+        detail = text || detail;
+      }
+    } catch (_) {}
     throw new Error(`${path} -> ${r.status}: ${detail}`);
   }
   return r.json();
