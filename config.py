@@ -295,7 +295,7 @@ AUGMENTATION: Dict[str, Any] = {
 # --------------------------------------------------------------------------
 #: Initial confidence gate.  NOT claimed to be optimal - it is tuned and reported
 #: by ``training/tune_threshold.py`` / documented in ``docs/evaluation.md``.
-CONFIDENCE_THRESHOLD: float = _env("CONFIDENCE_THRESHOLD", 0.70)
+CONFIDENCE_THRESHOLD: float = _env("CONFIDENCE_THRESHOLD", 0.38)
 SMOOTHING_WINDOW: int = _env("SMOOTHING_WINDOW", 3)      # 3-frame majority vote
 SMOOTHING_MIN_VOTES: int = _env("SMOOTHING_MIN_VOTES", 2)
 STABLE_FRAMES_REQUIRED: int = _env("STABLE_FRAMES_REQUIRED", 3)
@@ -308,11 +308,19 @@ IDLE_LABEL: str = "IDLE"
 #: (non-zero magnitude) before the engine will even attempt classification.
 #: Below this, the window is reported as IDLE instead of forcing the model
 #: to pick one of its trained classes for empty/resting input.
-IDLE_MIN_HAND_PRESENCE_RATIO: float = _env("IDLE_MIN_HAND_PRESENCE_RATIO", 0.30)
+IDLE_MIN_HAND_PRESENCE_RATIO: float = _env("IDLE_MIN_HAND_PRESENCE_RATIO", 0.18)
 #: Mean absolute frame-to-frame change in the hand landmarks, below which the
 #: hands are considered "present but static" (resting, not actively signing)
 #: and the window is reported as IDLE rather than classified.
-IDLE_MIN_HAND_MOTION: float = _env("IDLE_MIN_HAND_MOTION", 0.01)
+IDLE_MIN_HAND_MOTION: float = _env("IDLE_MIN_HAND_MOTION", 0.008)
+
+# --------------------------------------------------------------------------
+# Smart threshold (dual-condition gate)
+# --------------------------------------------------------------------------
+#: Minimum absolute probability the top-1 class must reach.
+SMART_MIN_PROB: float = _env("SMART_MIN_PROB", 0.28)
+#: Minimum gap between top-1 and top-2 probabilities.
+SMART_MIN_MARGIN: float = _env("SMART_MIN_MARGIN", 0.08)
 
 DEFAULT_MODEL: str = _env("DEFAULT_MODEL", "gru_mha")
 AVAILABLE_MODELS: Tuple[str, ...] = ("lstm", "gru", "gru_mha")

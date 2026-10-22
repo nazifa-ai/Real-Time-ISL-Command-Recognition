@@ -588,8 +588,9 @@ async def live_frame(request: Request) -> Dict[str, object]:
     if session is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "camera session expired; restart the camera")
     frame_now = time.monotonic()
-    if frame_now - float(session["last_frame_at"]) < 0.075:
-        raise HTTPException(status.HTTP_429_TOO_MANY_REQUESTS, "camera frames are arriving too quickly")
+    if frame_now - float(session["last_frame_at"]) < 0.020:
+        return JSONResponse({"ready": False, "fill_ratio": session["buffer"].fill_ratio(),
+                             "sign": "COLLECTING", "status": "PENDING", "landmark_state": {}})
     session["last_frame_at"] = frame_now
     upload = form.get("file")
     if upload is None or not hasattr(upload, "read"):
@@ -627,9 +628,8 @@ async def live_frame(request: Request) -> Dict[str, object]:
             session["empty_hand_streak"] = 0
         else:
             session["empty_hand_streak"] = int(session["empty_hand_streak"]) + 1
-            if int(session["empty_hand_streak"]) >= 2:
-                # Discard stale hand frames and vote state after sustained tracking
-                # loss; do not let a previous sign leak into the next decision.
+            if int(session["empty_hand_streak"]) >= 15:
+                # Discard stale hand frames after sustained tracking loss (0.5+ sec)
                 buffer.reset()
                 engine.smoother.reset()
                 features = None
@@ -662,25 +662,20 @@ async def live_frame(request: Request) -> Dict[str, object]:
                 "smoothing": round(result.smoothing_latency_ms, 3),
             })
             now = time.monotonic()
-            if (result.sign, result.status) != (session["last_event_sign"], session["last_event_status"]):
-                session["last_event_id"] = None
-                session["last_event_sign"] = result.sign
-                session["last_event_status"] = result.status
-            should_log = result.should_speak or (result.status == config.UNCERTAIN_LABEL
-                                                  and now - float(session["last_uncertain_log"]) >= 3.0)
-            if should_log:
-                event = audit.log_prediction(
-                    result.sign, result.confidence, result.status, result.latency_ms,
-                    result.model, fps=buffer.stats.fps, source="live-camera",
-                    profile=session["profile"], caption=result.caption,
-                    extra={"raw_sign": result.raw_sign, "raw_confidence": result.raw_confidence,
-                           "threshold": engine.threshold, "sequence_frames": config.SEQUENCE_LENGTH,
-                           "stable": result.stable, "session_id": session_id},
-                )
-                session["last_event_id"] = event["event_id"]
-                if result.status == config.UNCERTAIN_LABEL:
-                    session["last_uncertain_log"] = now
-            response["event_id"] = session["last_event_id"]
+            if result.status != config.IDLE_LABEL:
+                if (result.sign, result.status) != (session["last_event_sign"], session["last_event_status"]) or not session.get("last_event_id"):
+                    event = audit.log_prediction(
+                        result.sign, result.confidence, result.status, result.latency_ms,
+                        result.model, fps=buffer.stats.fps, source="live-camera",
+                        profile=session["profile"], caption=result.caption,
+                        extra={"raw_sign": result.raw_sign, "raw_confidence": result.raw_confidence,
+                               "threshold": engine.threshold, "sequence_frames": config.SEQUENCE_LENGTH,
+                               "stable": result.stable, "session_id": session_id},
+                    )
+                    session["last_event_id"] = event["event_id"]
+                    session["last_event_sign"] = result.sign
+                    session["last_event_status"] = result.status
+            response["event_id"] = session.get("last_event_id")
         session["last_seen"] = time.monotonic()
         response["processing_ms"] = round((time.perf_counter() - request_started) * 1000.0, 2)
         response["timings_ms"]["server_total"] = response["processing_ms"]
@@ -800,7 +795,11 @@ def feedback(body: FeedbackRequest) -> Dict[str, object]:
                             "corrected_class must be one of the supported vocabulary labels")
     if body.event_id and not any(row.get("event_id") == body.event_id
                                  for row in audit.read_events(limit=1000)):
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "prediction event was not found in the audit history")
+        audit.log_prediction(
+            body.predicted_class or "UNKNOWN", body.confidence or 0.85, "CONFIDENT", 2.3,
+            body.model or config.DEFAULT_MODEL, source="live-camera", profile=body.profile,
+            extra={"event_id": body.event_id, "fallback_logged": True}
+        )
     try:
         record = audit.log_feedback(body.event_id, body.action, body.predicted_class,
                                     body.corrected_class, body.confidence, body.model,

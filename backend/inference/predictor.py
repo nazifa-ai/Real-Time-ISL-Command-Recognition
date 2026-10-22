@@ -309,7 +309,16 @@ class PredictionEngine:
             idx = int(np.argmax(probs))
             raw_conf = float(probs[idx])
             raw_label = self.classes[idx] if idx < len(self.classes) else str(idx)
-            gated = raw_label if raw_conf >= self.threshold else config.UNCERTAIN_LABEL
+            # Smart threshold: top-1 must clear an absolute floor AND
+            # must lead the runner-up by a meaningful margin.
+            # This prevents "confidently wrong" predictions where two signs
+            # share probability almost equally (e.g. 40% vs 35%).
+            sorted_probs = np.sort(probs)[::-1]
+            top2_margin = float(sorted_probs[0] - sorted_probs[1]) if len(sorted_probs) > 1 else raw_conf
+            min_prob   = float(getattr(config, "SMART_MIN_PROB",   0.35))
+            min_margin = float(getattr(config, "SMART_MIN_MARGIN", 0.18))
+            smart_pass = raw_conf >= min_prob and top2_margin >= min_margin
+            gated = raw_label if smart_pass else config.UNCERTAIN_LABEL
 
         if idle:
             model_latency_ms = 0.0

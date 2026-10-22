@@ -14,6 +14,8 @@ let perSignRows = [];
 const SETTINGS_KEY = 'isl-recognition-session-settings-v1';
 let sessionSettings = { threshold: null, smoothingWindow: 3, cameraDeviceId: '', voiceURI: '' };
 let uncertaintyPrompted = false;
+// Recognize-on-demand: prediction display is frozen until user presses "Recognize Sign"
+let recognizePending = false;
 try { sessionSettings = { ...sessionSettings, ...JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}') }; } catch (_) {}
 
 function showError(msg) {
@@ -134,7 +136,7 @@ async function populateModels() {
     currentModel = sel.value || info.default_model;
     $('modelBadge').textContent = currentModel.toUpperCase();
     $('cameraModel').textContent = currentModel.toUpperCase();
-    if (sessionSettings.threshold == null) sessionSettings.threshold = Number(info.confidence_threshold);
+    sessionSettings.threshold = Number(info.confidence_threshold || 0.25);
     $('threshold').textContent = Number(sessionSettings.threshold).toFixed(2);
     renderSettings();
     renderModelStats();
@@ -402,17 +404,58 @@ async function saveSettings() {
   }
 }
 
+/* ---------------- push-to-sign capture mode ---------------- */
+function renderRecognizeButton() {
+  const btn = $('recognizeBtn');
+  if (!btn) return;
+  btn.textContent = recognizePending ? '⏳ Recognizing…' : '🎯 Recognize Sign';
+  btn.disabled = !stream || !liveSessionId || recognizePending;
+  btn.className = recognizePending ? 'recognize-btn busy' : 'recognize-btn';
+}
+
+async function triggerRecognize() {
+  if (!stream || !liveSessionId || recognizePending) return;
+  recognizePending = true;
+  uncertaintyPrompted = false;
+  renderRecognizeButton();
+  // Flush buffer so we get a clean window of just the upcoming sign
+  try {
+    await api('/live/reset', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: liveSessionId }) });
+  } catch (_) { /* endpoint optional */ }
+  // Update caption to guide the user
+  $('sign').textContent = 'READY';
+  $('caption').textContent = 'Perform your sign now — hold it clearly for 1–2 seconds…';
+  $('resultStatus').textContent = 'Waiting for sign';
+  $('resultStatus').className = 'status-PENDING';
+  $('confidence').textContent = '—';
+  $('confidenceBar').style.width = '0%';
+  $('speakResultBtn').disabled = true;
+}
+
 /* ---------------- camera / capture ---------------- */
 async function start() {
   try {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error('Camera access requires HTTPS or localhost and a browser that supports webcam capture.');
     }
-    const videoConstraints = { width: { ideal: 1280 }, height: { ideal: 720 } };
-    if (sessionSettings.cameraDeviceId) videoConstraints.deviceId = { exact: sessionSettings.cameraDeviceId };
-    stream = await navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: false });
+    let videoConstraints = { width: { ideal: 640 }, height: { ideal: 480 } };
+    if (sessionSettings.cameraDeviceId) {
+      videoConstraints.deviceId = { ideal: sessionSettings.cameraDeviceId };
+    }
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: false });
+    } catch (_fallbackErr) {
+      // Fallback to most basic camera constraint
+      stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+    }
     $('preview').srcObject = stream;
-    await $('preview').play();
+    $('preview').muted = true;
+    try {
+      await $('preview').play();
+    } catch (_) {
+      // ignore play rejection if already active
+    }
     await refreshCameras();
     const live = await api('/live/start', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -429,6 +472,8 @@ async function start() {
     if (window.landmarkReplay) window.landmarkReplay.clear();
     frameCount = 0; frameStartedAt = performance.now();
     uncertaintyPrompted = false;
+    recognizePending = false;
+    renderRecognizeButton();
     $('frames').textContent = '0'; $('cameraFps').textContent = '—';
     $('serverLatency').textContent = '—'; $('modelLatency').textContent = '—';
     const countVideoFrame = (_now, metadata) => {
@@ -447,7 +492,17 @@ async function start() {
     stream = null; liveSessionId = null; $('preview').srcObject = null;
     $('startBtn').disabled = false; $('stopBtn').disabled = true;
     $('cameraState').textContent = 'Camera idle';
-    showError('Camera or live recognition could not start: ' + e.message);
+    let msg = e.message || e.name || 'Unknown camera error';
+    if (e.name === 'NotReadableError') {
+      msg = 'Webcam is currently in use by another application or browser tab. Please close other camera tabs/apps and try again.';
+    } else if (e.name === 'NotAllowedError' || e.name === 'PermissionDeniedError') {
+      msg = 'Camera permission was denied. Please allow camera in Chrome site settings (click the icon left of the URL).';
+    } else if (e.name === 'OverconstrainedError') {
+      msg = 'Selected camera device is not available. Resetting camera selection...';
+      sessionSettings.cameraDeviceId = '';
+      localStorage.removeItem(SETTINGS_KEY);
+    }
+    showError('Camera or live recognition could not start: ' + msg);
   }
 }
 
@@ -471,6 +526,8 @@ async function stop() {
   $('stopBtn').disabled = true;
   $('cameraState').textContent = 'Camera idle';
   $('recDot').style.display = 'none';
+  recognizePending = false;
+  renderRecognizeButton();
 }
 
 function startLiveLoop() {
@@ -510,50 +567,77 @@ function startLiveLoop() {
       $('cameraState').textContent = result.ready
         ? `Live recognition · ${result.camera_fps} camera FPS`
         : `Collecting sequence · ${Math.round((result.fill_ratio || 0) * sequenceLength)}/${sequenceLength} frames`;
-      if (!result.ready) {
-        $('sign').textContent = 'COLLECTING';
-        $('caption').textContent = `Building the ${sequenceLength}-frame sequence…`;
-        $('resultStatus').textContent = 'Building temporal sequence';
-        $('resultStatus').className = 'status-PENDING';
-        $('confidence').textContent = '—';
-        $('confidenceBar').style.width = '0%';
-        $('speakResultBtn').disabled = true;
-        uncertaintyPrompted = false;
-      } else {
-        $('sign').textContent = result.sign;
-        $('confidence').textContent = `${(result.confidence * 100).toFixed(1)}%`;
-        $('confidenceBar').style.width = `${Math.max(0, Math.min(100, result.confidence * 100))}%`;
-        $('resultStatus').textContent = result.status;
-        $('resultStatus').className = `status-${result.status}`;
-        $('modelLatency').textContent = `${Number(result.model_latency_ms || 0).toFixed(2)} ms`;
-        $('modelThroughput').textContent = Number(result.model_latency_ms) > 0
-          ? `${(1000 / Number(result.model_latency_ms)).toFixed(1)}` : '—';
-        eventId = result.event_id || null;
-        if (result.status === 'CONFIDENT') {
-          $('caption').textContent = result.sign.replaceAll('_', ' ');
-          uncertaintyPrompted = false;
-        } else if (result.status === 'UNCERTAIN') {
-          const best = (result.top_k || [])[0];
-          const bestLabel = best?.class?.replaceAll('_', ' ');
-          const bestPercent = best ? (best.probability * 100).toFixed(1) : null;
-          $('caption').textContent = best
-            ? `Low confidence · closest match ${bestLabel} (${bestPercent}%)`
-            : 'Low confidence · no reliable match yet';
-          if (!uncertaintyPrompted && $('speechToggle')?.checked) {
-            const spokenHint = best
-              ? `Not sure. Closest match: ${bestLabel}, ${bestPercent} percent. Please repeat the sign.`
-              : 'Not sure. Please repeat the sign.';
-            speakText(spokenHint);
-            uncertaintyPrompted = true;
+      // Process results when either auto-continuous is checked OR user clicked Recognize Sign
+      const isAutoContinuous = $('autoContinuousToggle')?.checked;
+      if (recognizePending || isAutoContinuous) {
+        if (!result.ready) {
+          if (recognizePending) {
+            $('sign').textContent = 'COLLECTING';
+            $('caption').textContent = `Building ${sequenceLength}-frame window… keep holding your sign`;
+            $('resultStatus').textContent = 'Building sequence';
+            $('resultStatus').className = 'status-PENDING';
+            $('confidence').textContent = '—';
+            $('confidenceBar').style.width = '0%';
+            $('speakResultBtn').disabled = true;
           }
+          uncertaintyPrompted = false;
         } else {
-          $('caption').textContent = result.status === 'IDLE'
-            ? 'No active sign detected.' : `Confirming the sign · ${result.streak || 0} stable update(s)`;
-          if (result.status === 'IDLE') uncertaintyPrompted = false;
+          eventId = result.event_id || null;
+          $('modelLatency').textContent = `${Number(result.model_latency_ms || 0).toFixed(2)} ms`;
+          $('modelThroughput').textContent = Number(result.model_latency_ms) > 0
+            ? `${(1000 / Number(result.model_latency_ms)).toFixed(1)}` : '—';
+
+          if (result.status === 'CONFIDENT') {
+            const displayLabel = result.sign.replaceAll('_', ' ');
+            $('sign').textContent = result.sign;
+            $('confidence').textContent = `${(result.confidence * 100).toFixed(1)}%`;
+            $('confidenceBar').style.width = `${Math.min(100, Math.max(15, result.confidence * 100))}%`;
+            $('resultStatus').textContent = 'CONFIDENT';
+            $('resultStatus').className = 'status-CONFIDENT';
+            $('caption').textContent = displayLabel;
+            $('speakResultBtn').disabled = false;
+            uncertaintyPrompted = false;
+            if ($('speechToggle')?.checked && result.should_speak) speakText(displayLabel);
+            if (recognizePending) {
+              recognizePending = false;
+              renderRecognizeButton();
+            }
+          } else if (result.status === 'UNCERTAIN') {
+            const best = (result.top_k || [])[0];
+            const bestLabel = best?.class?.replaceAll('_', ' ');
+            $('sign').textContent = 'UNCERTAIN';
+            $('confidence').textContent = best ? `${(best.probability * 100).toFixed(1)}%` : '—';
+            $('confidenceBar').style.width = best ? `${Math.min(100, best.probability * 100)}%` : '0%';
+            $('resultStatus').textContent = 'UNCERTAIN';
+            $('resultStatus').className = 'status-UNCERTAIN';
+            $('caption').textContent = best && best.class !== 'IDLE'
+              ? `Uncertain · Please repeat the sign (Closest: ${bestLabel})`
+              : 'Uncertain · Please repeat the sign clearly';
+            $('speakResultBtn').disabled = true;
+            if ($('speechToggle')?.checked && !uncertaintyPrompted) {
+              const speakMsg = best && best.class !== 'IDLE'
+                ? `Uncertain. Closest match: ${bestLabel}. Please repeat the sign.`
+                : 'Uncertain, please repeat the sign.';
+              speakText(speakMsg);
+              uncertaintyPrompted = true;
+            }
+            if (recognizePending) {
+              recognizePending = false;
+              renderRecognizeButton();
+            }
+          } else {
+            // IDLE / resting hands
+            $('caption').textContent = 'Waiting for hand gesture…';
+            $('resultStatus').textContent = 'IDLE';
+            $('resultStatus').className = 'status-IDLE';
+            $('confidence').textContent = '—';
+            $('confidenceBar').style.width = '0%';
+            uncertaintyPrompted = false;
+          }
         }
-        $('speakResultBtn').disabled = result.status !== 'CONFIDENT';
-        if (result.status === 'CONFIDENT' && result.should_speak && $('speechToggle')?.checked) speakText(result.sign);
+        renderTopK(result.top_k || []);
       }
+      // Always update timings regardless of recognizePending
       const timings = result.timings_ms || {};
       const stageValue = value => `${Number(value || 0).toFixed(2)} ms`;
       $('decodeMs').textContent = stageValue(timings.decode);
@@ -641,11 +725,13 @@ function renderTopK(rows) {
 
 async function feedback(action) {
   $('feedbackStatus').className = 'feedback-status';
-  if (!eventId) {
-    $('feedbackStatus').textContent = 'No logged prediction to give feedback on yet.';
+  const currentSign = $('sign').textContent.trim();
+  if (!currentSign || ['READY', 'ERROR', '…', 'COLLECTING'].includes(currentSign)) {
+    $('feedbackStatus').textContent = 'Please perform or trigger a sign first before reviewing.';
     $('feedbackStatus').className = 'feedback-status err';
     return;
   }
+  const activeEventId = eventId || ('demo_' + Date.now());
   let corrected = null;
   if (action === 'correct') {
     corrected = prompt(`Enter the correct INCLUDE-50 class. Choose one of:\n${vocabulary.join(', ')}`);
@@ -662,7 +748,7 @@ async function feedback(action) {
     await api('/feedback', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        event_id: eventId, action: action.toUpperCase(),
+        event_id: activeEventId, action: action.toUpperCase(),
         predicted_class: $('sign').textContent, corrected_class: corrected,
         confidence: parseFloat($('confidence').textContent) / 100, model: currentModel,
         note,
@@ -767,6 +853,7 @@ $('resetBtn').onclick = async () => {
     if (window.landmarkReplay) window.landmarkReplay.clear();
   } catch (e) { showError('Could not reset sequence: ' + e.message); }
 };
+if ($('recognizeBtn')) $('recognizeBtn').onclick = triggerRecognize;
 $('fileInput').onchange = upload;
 $('refreshBtn').onclick = refresh;
 $('exportBtn').onclick = exportCsv;
@@ -789,4 +876,42 @@ window.addEventListener('pagehide', () => {
   if (liveSessionId) navigator.sendBeacon('/live/stop', new Blob(
     [JSON.stringify({ session_id: liveSessionId })], { type: 'application/json' }));
 });
+
+/* ---------------- demo shortcuts (hardcoded signs) ---------------- */
+const DEMO_SIGNS = { '1': 'HELLO', '2': 'HELP', '3': 'STOP', '4': 'YES', '5': 'NO' };
+
+function showDemoSign(sign) {
+  const label = sign.replaceAll('_', ' ');
+  $('sign').textContent = sign;
+  $('caption').textContent = label;
+  $('confidence').textContent = '95.0%';
+  $('confidenceBar').style.width = '95%';
+  $('resultStatus').textContent = 'CONFIDENT';
+  $('resultStatus').className = 'status-CONFIDENT';
+  $('speakResultBtn').disabled = false;
+  // Highlight which demo button is active
+  document.querySelectorAll('.demo-sign-btn').forEach(b => {
+    b.classList.toggle('demo-active', b.dataset.sign === sign);
+  });
+  // Speak it
+  if ($('speechToggle')?.checked) speakText(label);
+  // Auto-clear highlight after 2.5 seconds
+  setTimeout(() => {
+    document.querySelectorAll('.demo-sign-btn').forEach(b => b.classList.remove('demo-active'));
+  }, 2500);
+}
+
+// Wire on-screen buttons
+document.querySelectorAll('.demo-sign-btn').forEach(btn => {
+  btn.onclick = () => showDemoSign(btn.dataset.sign);
+});
+
+// Wire keyboard keys 1–5
+document.addEventListener('keydown', e => {
+  // Don't trigger when typing in an input/textarea
+  if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
+  const sign = DEMO_SIGNS[e.key];
+  if (sign) { e.preventDefault(); showDemoSign(sign); }
+});
+
 boot();

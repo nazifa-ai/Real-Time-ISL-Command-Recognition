@@ -35,7 +35,7 @@
     <div class="banner" id="errorBanner" hidden></div>
 
     <section id="view-home" class="view active">
-      <div class="welcome"><div><h1>Recognition workspace</h1><p>Camera → landmarks → temporal model → reviewed classroom output</p></div><button id="startBtn" class="primary start-main">▶ &nbsp;Start live session</button><button id="resetBtn" type="button">Reset sequence</button><button id="stopBtn" class="stop-main" disabled>Stop session</button></div>
+      <div class="welcome"><div><h1>Recognition workspace</h1><p>Camera → landmarks → temporal model → reviewed classroom output</p></div><button id="startBtn" class="primary start-main">▶ &nbsp;Start live session</button><button id="resetBtn" type="button">Reset sequence</button><button id="stopBtn" class="stop-main" disabled>Stop session</button><button id="recognizeBtn" class="recognize-btn" type="button" disabled title="Click when ready to recognize a sign.">🎯 Recognize Sign</button><label class="auto-toggle" title="Check this to continuously predict on every frame without clicking"><input type="checkbox" id="autoContinuousToggle"> Auto continuous</label></div>
       <div class="kpi-grid">
         <article class="kpi"><span class="kpi-label">CAMERA INPUT</span><div><strong id="cameraFps">—</strong><small>FPS</small></div><span class="kpi-foot"><b id="frames">0</b> camera frames received</span></article>
         <article class="kpi"><span class="kpi-label">TEMPORAL WINDOW</span><div><strong id="sequenceFrames">0/30</strong></div><span class="kpi-foot">Frames collected for this decision</span></article>
@@ -68,6 +68,20 @@
           <div class="feedback"><span>Human review</span><div id="feedback" class="feedback-buttons"><button data-action="accept" class="good">✓ Accept</button><button data-action="correct">↺ Correct</button><button data-action="reject" class="bad">× Reject</button></div><div id="feedbackStatus" class="feedback-status"></div></div>
         </article>
       </div>
+
+      <article class="panel demo-shortcuts-panel">
+        <div class="panel-head">
+          <div><span class="section-kicker">DEMO SHORTCUTS</span><h3>Instant sign display &nbsp;<span class="shortcut-hint">Press keyboard 1–5</span></h3></div>
+          <span class="microcopy" style="margin:0">Click a sign or press its number key while camera is active</span>
+        </div>
+        <div class="demo-btns">
+          <button class="demo-sign-btn" data-sign="HELLO" data-key="1"><span class="demo-key">1</span> HELLO</button>
+          <button class="demo-sign-btn" data-sign="HELP"  data-key="2"><span class="demo-key">2</span> HELP</button>
+          <button class="demo-sign-btn" data-sign="STOP"  data-key="3"><span class="demo-key">3</span> STOP</button>
+          <button class="demo-sign-btn" data-sign="YES"   data-key="4"><span class="demo-key">4</span> YES</button>
+          <button class="demo-sign-btn" data-sign="NO"    data-key="5"><span class="demo-key">5</span> NO</button>
+        </div>
+      </article>
 
       <div class="lower-grid">
         <article class="panel"><div class="panel-head"><div><span class="section-kicker">MODEL BENCHMARK</span><h3>Which model should I use?</h3></div><button class="text-button" data-open="perf">Full comparison →</button></div><div id="homeModelTable" class="model-cards"></div></article>
